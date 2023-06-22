@@ -3,7 +3,7 @@ import GewestFilter from "../../../components/GewestFilter";
 import KlassementTable from "../../../components/KlassementTable";
 import { TeamRanking, TROPHY } from "../../../types/general";
 
-const provinciaal : Array<TeamRanking> = [
+const provinciaal: Array<TeamRanking> = [
   {
     id: 1,
     ploegnaam: "Dartsclub De Kruisboog",
@@ -14,7 +14,7 @@ const provinciaal : Array<TeamRanking> = [
     voor: 0,
     tegen: 0,
     punten: 0,
-    trophy: TROPHY.GOLD
+    trophy: TROPHY.GOLD,
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const provinciaal : Array<TeamRanking> = [
     voor: 0,
     tegen: 0,
     punten: 0,
-    trophy: TROPHY.SILVER
+    trophy: TROPHY.SILVER,
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const provinciaal : Array<TeamRanking> = [
     voor: 0,
     tegen: 0,
     punten: 0,
-    trophy: TROPHY.BRONZE
+    trophy: TROPHY.BRONZE,
   },
   {
     id: 4,
@@ -75,19 +75,21 @@ const provinciaal : Array<TeamRanking> = [
   },
 ];
 
-const Klassement : NextPage = () => {
+const Klassement: NextPage = () => {
   return (
-    <div className="text-white">
+    <div className="text-blacktext dark:text-white">
       <div className="flex justify-between items-center">
         <h1 className="text-6xl font-extrabold mb-5">Klassement ranking</h1>
-        <GewestFilter />
+        <div className="w-1/3">
+          <GewestFilter />
+        </div>
       </div>
 
       <div className="my-5">
         <h2 className="text-4xl font-semibold my-10">Provinciaal</h2>
         <table className="table-auto w-full text-center text-[#313131]">
           <thead>
-            <tr className="bg-[#313131] text-white h-12">
+            <tr className="text-white bg-[#313131] h-12">
               <th className="w-5"></th>
               <th>Nr.</th>
               <th>Ploegnaam</th>
@@ -110,6 +112,6 @@ const Klassement : NextPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Klassement;

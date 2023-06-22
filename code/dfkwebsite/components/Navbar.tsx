@@ -81,10 +81,10 @@ const routes = [
 const Navbar: FunctionComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="px-10 lg:px-20 py-5 flex flex-wrap justify-between items-center bg-nav-background relative">
+    <nav className="px-10 lg:px-20 py-5 flex flex-wrap justify-between items-center relative">
       <Icon
         icon="mdi:hamburger-menu"
-        className="lg:hidden text-6xl text-white order-0 lg:order-1"
+        className="lg:hidden text-6xl text-blacktext dark:text-white order-0 lg:order-1"
         onClick={() => setIsOpen(!isOpen)}
       />
       <Link href={"/"}>
@@ -101,7 +101,7 @@ const Navbar: FunctionComponent = () => {
       <ul
         className={`${
           isOpen ? "flex" : "hidden"
-        } lg:flex flex-col lg:flex-row gap-5 lg:gap-8 xl:gap-15 2xl:gap-20 items-center absolute top-full left-0 py-5 z-10 bg-nav-background border-t-2 border-b-2 lg:border-none lg:relative`}
+        } lg:flex flex-col lg:flex-row gap-5 lg:gap-8 xl:gap-15 2xl:gap-20 items-center absolute top-full left-0 py-5 z-10 bg-white dark:bg-background lg:relative`}
       >
         {routes.map((route, index) => {
           return (

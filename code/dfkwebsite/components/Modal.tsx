@@ -18,8 +18,8 @@ const Modal: FunctionComponent<ModalData> = ({
     <div className={`${modalOpen ? "" : "hidden"}`}>
       <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50"></div>
       <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center">
-        <div className="bg-background min-w-[33%] max-w-full rounded-2xl p-10 relative text-white">
-          <div className="flex justify-between items-center text-white relative">
+        <div className="bg-white dark:bg-background min-w-[33%] max-w-full rounded-2xl p-10 relative text-blacktext dark:text-white">
+          <div className="flex justify-between items-center relative">
             {title ? (
               <h1 className="text-4xl font-semibold mr-10">{title}</h1>
             ) : (

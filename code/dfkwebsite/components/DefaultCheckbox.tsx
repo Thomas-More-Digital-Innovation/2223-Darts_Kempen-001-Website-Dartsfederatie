@@ -28,7 +28,7 @@ const DefaultCheckbox: FunctionComponent<DefaultCheckboxData> = ({
 
   return (
     <div className="flex items-center gap-5">
-      <label htmlFor={name} className="text-xl text-white">
+      <label htmlFor={name} className="text-xl text-blacktext dark:text-white">
         {label ?? name}
         {regex && (
           <span

@@ -57,7 +57,7 @@ const Nieuws: NextPage = () => {
   return (
     <div>
       <h1
-        className="text-6xl font-extrabold text-white mb-5"
+        className="text-6xl font-extrabold text-blacktext dark:text-white mb-5"
       >
         Nieuws
       </h1>
