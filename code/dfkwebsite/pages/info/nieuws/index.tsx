@@ -3,7 +3,7 @@ import { NextPage } from "next";
 const Nieuws: NextPage = () => {
   return (
     <div>
-      <h1 className="text-6xl font-extrabold text-white mb-5">Nieuws</h1>
+      <h1 className="text-6xl font-extrabold text-blacktext dark:text-white mb-5">Nieuws</h1>
       {/* <ImageRead
         title={posts[0].title}
         summary={posts[0].summary}

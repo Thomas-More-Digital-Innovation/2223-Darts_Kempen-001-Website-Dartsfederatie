@@ -55,7 +55,7 @@ const DefaultSelect: FunctionComponent<DefaultSelectData> = ({
   return (
     <div className="flex flex-col w-full">
       {labelEnabled && (
-        <p className="text-xl text-white mt-5 mb-2">
+        <p className="text-xl text-blacktext dark:text-white mt-5 mb-2">
           {label ?? name}
           {regex && (
             <span
@@ -76,7 +76,7 @@ const DefaultSelect: FunctionComponent<DefaultSelectData> = ({
           id={id ? id : name}
           onChange={onSelectChange}
           placeholder={placeholder}
-          className="bg-gray-200 p-2 text-black"
+          className="bg-gray-100 dark:bg-gray-200 p-2 text-black"
           options={options}
           defaultValue={defaultValue}
           isMulti={multiple}
@@ -88,7 +88,7 @@ const DefaultSelect: FunctionComponent<DefaultSelectData> = ({
           id={id ? id : name}
           onChange={onChange}
           placeholder={placeholder}
-          className="bg-gray-200 p-2 text-black"
+          className="bg-gray-100 dark:bg-gray-200 p-2 text-black"
         >
           {defaultOptionEnabled && (
             <option key={defaultOptionValue} value={defaultOptionValue}>

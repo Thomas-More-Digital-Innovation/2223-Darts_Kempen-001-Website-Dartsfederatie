@@ -65,10 +65,12 @@ const provinciaal : Array<PersonRanking> = [
 
 const IndividueleRanking : NextPage = () => {
   return (
-    <div className="text-white">
+    <div className="text-blacktext dark:text-white">
       <div className="flex justify-between items-center">
         <h1 className="text-6xl font-extrabold mb-5">Individuele ranking</h1>
-        <GewestFilter />
+        <div className="w-1/3">
+          <GewestFilter />
+        </div>
       </div>
 
       <div className="my-5">

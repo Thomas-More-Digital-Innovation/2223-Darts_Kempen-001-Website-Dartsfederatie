@@ -37,7 +37,7 @@ const DefaultInput: FunctionComponent<DefaultInputData> = ({
   return (
     <div className="flex flex-col" style={style}>
       {label && (
-        <label htmlFor={name} className="text-xl text-white mt-5 mb-2">
+        <label htmlFor={name} className="text-xl text-blacktext dark:text-white mt-5 mb-2">
           {label ?? name}
           {regex && (
             <span
@@ -59,7 +59,7 @@ const DefaultInput: FunctionComponent<DefaultInputData> = ({
           id={id ? id : name}
           onChange={onChange}
           placeholder={placeholder}
-          className="bg-gray-200 p-2 text-black"
+          className="bg-gray-100 dark:bg-gray-200 p-2 text-black"
         />
       ) : (
         <textarea
@@ -70,7 +70,7 @@ const DefaultInput: FunctionComponent<DefaultInputData> = ({
           placeholder={placeholder}
           cols={30}
           rows={10}
-          className="bg-gray-200 p-2 text-black"
+          className="bg-gray-100 dark:bg-gray-200 p-2 text-black"
         ></textarea>
       )}
     </div>

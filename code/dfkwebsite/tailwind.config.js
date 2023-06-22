@@ -20,6 +20,7 @@ module.exports = {
         "delete-button": "#FF4E4E",
         "add-button": "#15803D",
         "light-gray": "#676767",
+        "blacktext": "#000000",
       },
     },
   },
