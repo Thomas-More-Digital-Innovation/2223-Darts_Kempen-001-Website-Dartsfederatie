@@ -19,6 +19,7 @@ const availableParams = [
   { name: "endDate" },
   { name: "amountTeams", regex: /^[0-9]+$/, castFunction: Number },
   { name: "prefix", regex: /^[a-zA-Z:]+$/, default: "id:" },
+  { name: "dummy", regex: /^[0-1]$/, default: false, castFunction: Number },
 ];
 type urlParamsType = {
   // General
@@ -32,10 +33,11 @@ type urlParamsType = {
   amountTeams?: number;
   startDate: string;
   endDate: string;
+  dummy?: boolean;
 };
 
 export const getParams = (url: string) => {
-  if (url[0] == "/") url = "https://www.placeholder.xyz/" + url;
+  if (url.startsWith("/")) url = "https://www.placeholder.xyz/" + url;
   const urlObject = new URL(url);
   const data: { [key: string]: any } = {};
   availableParams.forEach((availableParam) => {

@@ -66,6 +66,7 @@ const GeneratePlaydays: NextPage = () => {
       newData.push(row);
     }
     setTableData(newData);
+    console.log(newData);
   };
 
   const handleTableDataChange = (
@@ -137,11 +138,17 @@ const GeneratePlaydays: NextPage = () => {
           });
 
         if (!currentCompetition) {
-          console.log("No competition by this ID found");
-          return;
+          if (params.dummy) {
+            currentCompetition = dummyData.competitions[0];
+            setCompetitionInfo(currentCompetition);
+          } else {
+            console.log("No competition by this ID found");
+            return;
+          }
         }
 
         if (currentCompetition?.teamsID) {
+          console.log("teamsID", currentCompetition.teamsID);
           setCompetitionTeams(
             teams.filter((team) =>
               currentCompetition?.teamsID
@@ -160,6 +167,10 @@ const GeneratePlaydays: NextPage = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  console.log("competition info", competitionInfo);
+  console.log("amount teams", amountTeams);
+  console.log("competition teams", competitionTeams);
 
   return (
     <div>
@@ -192,7 +203,7 @@ const GeneratePlaydays: NextPage = () => {
       </div>
 
       <div
-        className="grid children:py-4 gap-2 children:border-b  text-white border-t"
+        className="grid children:py-4 gap-2 children:border-b border-t"
         style={{
           gridTemplateRows: `repeat(${
             competitionTeams.length + 1
