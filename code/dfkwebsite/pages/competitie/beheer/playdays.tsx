@@ -19,6 +19,12 @@ export interface TableData {
   team2: string;
 }
 
+function getTeamsSelect() {
+  return Array.from({ length: 10 }).map((_, index) => {
+    return { label: `Team ${index + 1}`, value: `Team ${index + 1}` };
+  });
+}
+
 const GeneratePlaydays: NextPage = () => {
   const router = useRouter();
   const { asPath } = router;
@@ -39,13 +45,13 @@ const GeneratePlaydays: NextPage = () => {
     competitionInfo: Competition,
     teamAmount?: number
   ): void => {
-    const teamCount = teamAmount || amountTeams;
+    const teamCount = teamAmount ?? amountTeams;
 
     if (!competitionInfo) return;
 
     const maxRows = countFridays(
-      new Date(competitionInfo?.startDate),
-      new Date(competitionInfo?.endDate)
+      new Date(competitionInfo?.startDate ?? params.startDate ?? 0),
+      new Date(competitionInfo?.endDate ?? params.endDate ?? 0)
     );
 
     const newData: TableData[][] = [];
@@ -150,7 +156,7 @@ const GeneratePlaydays: NextPage = () => {
           currentCompetition,
           currentCompetition?.teamsID?.length
         );
-        console.log("copetition teams", competitionTeams);
+        console.log("competition teams", competitionTeams);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -159,26 +165,31 @@ const GeneratePlaydays: NextPage = () => {
     <div>
       <OverzichtTopBar titleName="Speeldagen genereren" />
 
-      <DefaultSelect
-        name="teams"
-        label="Selecteer teams"
-        options={teams}
-        multiple
-        search
-        value={competitionTeams}
-        onSelectChange={(selectedOptions, action) => {
-          setCompetitionTeams(selectedOptions);
-          setAmountTeams(selectedOptions.length);
+      <div className="grid grid-cols-4 gap-4">
+        {Array.from({ length: amountTeams }).map((_, index) => (
+          <DefaultSelect
+            key={`Team ${index + 1}`}
+            name={`team${index + 1}`}
+            label={`Team ${index + 1}`}
+            options={teams}
+            search
+            notRequired={true}
+            value={competitionTeams}
+            onSelectChange={(selectedOptions, action) => {
+              setCompetitionTeams(selectedOptions);
+              setAmountTeams(selectedOptions.length);
 
-          handleAmountTeamsChange(
-            competitionInfo as Competition,
-            selectedOptions.length
-          );
+              handleAmountTeamsChange(
+                competitionInfo as Competition,
+                selectedOptions.length
+              );
 
-          console.log(selectedOptions);
-          console.log(teams);
-        }}
-      />
+              // console.log(selectedOptions);
+              // console.log(teams);
+            }}
+          />
+        ))}
+      </div>
 
       <div
         className="grid children:py-4 gap-2 children:border-b  text-white border-t"
@@ -203,10 +214,12 @@ const GeneratePlaydays: NextPage = () => {
               <p>
                 {new Date(
                   getNextFriday(
-                    new Date(competitionInfo?.startDate ?? 0)
+                    new Date(
+                      competitionInfo?.startDate ?? params.startDate ?? 0
+                    )
                   ).setDate(
                     getNextFriday(
-                      new Date(competitionInfo?.endDate ?? 0)
+                      new Date(competitionInfo?.endDate ?? params.endDate ?? 0)
                     ).getDate() +
                       7 * rowIndex
                   )
@@ -224,7 +237,7 @@ const GeneratePlaydays: NextPage = () => {
                   <DefaultSelect
                     name={`${rowIndex}-${columnIndex}`}
                     labelEnabled={false}
-                    options={competitionTeams}
+                    options={getTeamsSelect()}
                     search
                     value={{
                       label: competitionTeams.find(
@@ -250,7 +263,7 @@ const GeneratePlaydays: NextPage = () => {
                   <span>vs</span>
                   <DefaultSelect
                     name={`${rowIndex}-${columnIndex}`}
-                    options={competitionTeams}
+                    options={getTeamsSelect()}
                     labelEnabled={false}
                     search
                     value={{
