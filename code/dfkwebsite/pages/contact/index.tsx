@@ -4,33 +4,79 @@ import DefaultInput from "../../components/DefaultInput";
 import DefaultSelect from "../../components/DefaultSelect";
 import { bestuur } from "../../data";
 import DefaultCheckbox from "../../components/DefaultCheckbox";
+import Modal from "../../components/Modal";
+import { useState } from "react";
+
+const questions = [
+  {
+    question: "Vraag",
+    answer: "Antwoord",
+  },
+  {
+    question: "Vraag",
+    answer: "Antwoord",
+  },
+];
 
 const Contact: NextPage = () => {
+  const [faqModalOpen, setFaqModalOpen] = useState(false);
+
   return (
     <div className="text-blacktext dark:text-white">
-      <h1 className="text-6xl font-extrabold mb-5">
-        Contact pagina
-      </h1>
+      <Modal
+        title="Beheer FAQ"
+        modalOpen={faqModalOpen}
+        setModalOpen={setFaqModalOpen}
+      >
+        <div className="flex flex-col mt-5">
+          {questions.map((question, index) => {
+            return (
+              <p
+                className="text-lg bg-white dark:bg-nav-background border-2 border-nav-background dark:border-none hover:cursor-pointer my-3 px-2 py-2 rounded-lg"
+                key={question.question}
+              >
+                {index + 1 + ". " + question.question}
+              </p>
+            );
+          })}
+        </div>
+      </Modal>
+      <h1 className="text-6xl font-extrabold mb-5">Contact pagina</h1>
 
-      <h2 className="text-4xl font-semibold my-10">FAQ</h2>
+      <div className="flex justify-between my-10">
+        <h2 className="text-4xl font-semibold">FAQ</h2>
+        <button
+          className="bg-add-button text-white dark:text-blacktext rounded-lg px-5 py-3 hover:cursor-pointer"
+          onClick={() => setFaqModalOpen(true)}
+        >
+          Beheer FAQ
+        </button>
+      </div>
 
       <div className="flex flex-col gap-5">
-        <Faq question="Vraag" answer="Antwoord" />
-        <Faq question="Vraag" answer="Antwoord" />
+        {questions.map((question, index) => {
+          return (
+            <Faq
+              key={question.question}
+              question={question.question}
+              answer={question.answer}
+            />
+          );
+        })}
       </div>
 
       <div className="my-20">
         <h2 className="text-4xl font-semibold mb-10">Contacteer ons</h2>
-        <form action="" className="flex flex-col gap-5 w-8/12">
-          <div className="flex gap-10">
-            <div className="flex flex-col gap-1 w-1/2">
+        <form action="" className="flex flex-col gap-5 w-2/3">
+          <div className="flex gap-10 w-full">
+            <div className="flex flex-col w-1/2">
               <DefaultInput
                 name="afzender"
                 label="Afzender"
                 placeholder="Afzender"
               />
             </div>
-            <div className="flex flex-col gap-1 w-1/2">
+            <div className="flex flex-col w-1/2">
               <DefaultInput
                 name="email"
                 label="Email"
@@ -39,8 +85,8 @@ const Contact: NextPage = () => {
               />
             </div>
           </div>
-          <div className="flex gap-10">
-            <div className="flex flex-col gap-1 w-1/2">
+          <div className="flex gap-10 w-full">
+            <div className="flex flex-col w-1/2">
               <DefaultSelect
                 name="aan"
                 label="Aan"
@@ -52,7 +98,7 @@ const Contact: NextPage = () => {
                 })}
               />
             </div>
-            <div className="flex flex-col gap-1 w-1/2">
+            <div className="flex flex-col w-1/2">
               <DefaultInput
                 name="onderwerp"
                 label="Onderwerp"
@@ -60,7 +106,7 @@ const Contact: NextPage = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col gap-1 w-full">
+          <div className="flex flex-col w-full">
             <DefaultInput
               name="bericht"
               label="Bericht"
@@ -77,7 +123,7 @@ const Contact: NextPage = () => {
           </div>
           <button
             type="submit"
-            className="text-white dark:text-blacktext bg-neutral-700 hover:bg-neutral-800 dark:hover:bg-gray-300 dark:bg-nav-background px-10 py-2 rounded w-1/3"
+            className="text-white bg-add-button hover:bg-opacity-80 px-10 py-2 rounded w-1/3"
           >
             Verstuur
           </button>
