@@ -41,7 +41,7 @@ const GeneratePlaydays: NextPage = () => {
             ? `(${competitionTeams[index].label})`
             : ""
         } `,
-        value: `Team ${index + 1}`,
+        value: competitionTeams[index]?.value ?? "",
       };
     });
   }
@@ -185,6 +185,7 @@ const GeneratePlaydays: NextPage = () => {
   console.log("competition info", competitionInfo);
   console.log("amount teams", amountTeams);
   console.log("competition teams", competitionTeams);
+  console.log("table data", tableData);
 
   return (
     <div>
@@ -262,14 +263,12 @@ const GeneratePlaydays: NextPage = () => {
                     labelEnabled={false}
                     options={getTeamsSelect()}
                     search
-                    value={{
-                      label: competitionTeams.find(
-                        (competitionTeam) =>
-                          competitionTeam.value ===
-                          tableData[rowIndex][columnIndex].team1
-                      )?.label,
-                      value: tableData[rowIndex][columnIndex].team1,
-                    }}
+                    value={getTeamsSelect().find(
+                      (competitionTeam) =>
+                        competitionTeam.value != "" &&
+                        competitionTeam.value ===
+                          tableData[rowIndex][columnIndex].team2
+                    )}
                     onSelectChange={(
                       selectedOption: SelectOption,
                       action: { action: string; name: string }
@@ -289,14 +288,12 @@ const GeneratePlaydays: NextPage = () => {
                     options={getTeamsSelect()}
                     labelEnabled={false}
                     search
-                    value={{
-                      label: competitionTeams.find(
-                        (competitionTeam) =>
-                          competitionTeam.value ===
+                    value={getTeamsSelect().find(
+                      (competitionTeam) =>
+                        competitionTeam.value != "" &&
+                        competitionTeam.value ===
                           tableData[rowIndex][columnIndex].team2
-                      )?.label,
-                      value: tableData[rowIndex][columnIndex].team2,
-                    }}
+                    )}
                     onSelectChange={(
                       selectedOption: SelectOption,
                       action: { action: string; name: string }
