@@ -267,7 +267,7 @@ const GeneratePlaydays: NextPage = () => {
                       (competitionTeam) =>
                         competitionTeam.value != "" &&
                         competitionTeam.value ===
-                          tableData[rowIndex][columnIndex].team2
+                          tableData[rowIndex][columnIndex].team1
                     )}
                     onSelectChange={(
                       selectedOption: SelectOption,
