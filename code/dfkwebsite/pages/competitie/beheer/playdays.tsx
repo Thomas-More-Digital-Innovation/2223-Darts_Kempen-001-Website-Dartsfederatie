@@ -19,12 +19,6 @@ export interface TableData {
   team2: string;
 }
 
-function getTeamsSelect() {
-  return Array.from({ length: 10 }).map((_, index) => {
-    return { label: `Team ${index + 1}`, value: `Team ${index + 1}` };
-  });
-}
-
 const GeneratePlaydays: NextPage = () => {
   const router = useRouter();
   const { asPath } = router;
@@ -35,9 +29,22 @@ const GeneratePlaydays: NextPage = () => {
 
   const [competitionInfo, setCompetitionInfo] = useState<
     Competition | undefined
-  >(undefined);
+  >({} as Competition);
 
   const [amountTeams, setAmountTeams] = useState<number>(0);
+
+  function getTeamsSelect() {
+    return Array.from({ length: amountTeams }).map((_, index) => {
+      return {
+        label: `Team ${index + 1} ${
+          competitionTeams[index]?.label
+            ? `(${competitionTeams[index].label})`
+            : ""
+        } `,
+        value: `Team ${index + 1}`,
+      };
+    });
+  }
 
   const [tableData, setTableData] = useState<TableData[][]>([]);
 
@@ -65,6 +72,11 @@ const GeneratePlaydays: NextPage = () => {
       }
       newData.push(row);
     }
+
+    setCompetitionTeams(
+      Array.from({ length: teamCount }).fill({}) as SelectOption[]
+    );
+
     setTableData(newData);
     console.log(newData);
   };
@@ -91,7 +103,9 @@ const GeneratePlaydays: NextPage = () => {
     })
   );
 
-  const [competitionTeams, setCompetitionTeams] = useState<SelectOption[]>([]);
+  const [competitionTeams, setCompetitionTeams] = useState<SelectOption[]>(
+    Array.from({ length: amountTeams }).fill({}) as SelectOption[]
+  );
 
   const tableFilled = (): boolean => {
     if (tableData.some((row) => row.some((cell) => !cell.team1 || !cell.team2)))
@@ -176,7 +190,7 @@ const GeneratePlaydays: NextPage = () => {
     <div>
       <OverzichtTopBar titleName="Speeldagen genereren" />
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-4 mb-10">
         {Array.from({ length: amountTeams }).map((_, index) => (
           <DefaultSelect
             key={`Team ${index + 1}`}
@@ -185,15 +199,13 @@ const GeneratePlaydays: NextPage = () => {
             options={teams}
             search
             notRequired={true}
-            value={competitionTeams}
-            onSelectChange={(selectedOptions, action) => {
-              setCompetitionTeams(selectedOptions);
-              setAmountTeams(selectedOptions.length);
-
-              handleAmountTeamsChange(
-                competitionInfo as Competition,
-                selectedOptions.length
-              );
+            value={competitionTeams[index]}
+            onSelectChange={(selectedTeam, action) => {
+              setCompetitionTeams((prevTeams) => {
+                const newTeams = [...prevTeams];
+                newTeams[index] = selectedTeam;
+                return newTeams;
+              });
 
               // console.log(selectedOptions);
               // console.log(teams);
@@ -244,7 +256,7 @@ const GeneratePlaydays: NextPage = () => {
             </div>
             {rowData.map((data, columnIndex) => (
               <div key={columnIndex} className="flex items-center ">
-                <div className="flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-center items-center w-full text-black">
                   <DefaultSelect
                     name={`${rowIndex}-${columnIndex}`}
                     labelEnabled={false}
