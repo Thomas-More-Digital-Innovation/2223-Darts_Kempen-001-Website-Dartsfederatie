@@ -8,17 +8,6 @@ import { ClubFront } from "./types/club";
 import { PlayerFront } from "./types/player";
 import { TeamFront } from "./types/team";
 
-export const competitions: Array<Competition> = [
-  {
-    competitionID: "id:dummy:1",
-    name: "competitie 1",
-    type: COMPETITION_TYPE.COMPETITION,
-    classification: CLASSIFICATION.PROVINCIAAL,
-    startDate: 0,
-    endDate: 0,
-  },
-];
-
 export const players: Array<PlayerFront> = [
   {
     firstName: "Bryan",
@@ -156,6 +145,18 @@ export const bestuur: Array<managementData> = [
     functie: "Toernooileiding & sportieve cel/standkeuring",
     mail: "jos.vanbergen@dfk.be",
     telefoonnummer: "(+32) 00 123 45 67 89",
+  },
+];
+
+export const competitions: Array<Competition> = [
+  {
+    competitionID: "id:dummy:1",
+    name: "competitie 1",
+    type: COMPETITION_TYPE.COMPETITION,
+    classification: CLASSIFICATION.PROVINCIAAL,
+    startDate: new Date("2021-01-01").getTime(),
+    endDate: new Date("2021-03-01").getTime(),
+    teamsID: teams.map((team) => team.teamID),
   },
 ];
 
