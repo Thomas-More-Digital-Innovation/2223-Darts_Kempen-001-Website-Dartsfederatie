@@ -20,6 +20,8 @@ const questions = [
 
 const Contact: NextPage = () => {
   const [faqModalOpen, setFaqModalOpen] = useState(false);
+  const [detailedFaqModalOpen, setDetailedFaqModalOpen] = useState(false);
+  const [selectedQuestion, setSelectedQuestion] = useState(questions[0]);
 
   return (
     <div className="text-blacktext dark:text-white">
@@ -32,8 +34,12 @@ const Contact: NextPage = () => {
           {questions.map((question, index) => {
             return (
               <p
-                className="text-lg bg-white dark:bg-nav-background border-2 border-nav-background dark:border-none hover:cursor-pointer my-3 px-2 py-2 rounded-lg"
+                className="text-lg bg-white dark:bg-nav-background border-2 border-nav-background dark:border-none hover:cursor-pointer my-2 px-2 py-2 rounded-lg"
                 key={question.question}
+                onClick={() => {
+                  setSelectedQuestion(question);
+                  setDetailedFaqModalOpen(true);
+                }}
               >
                 {index + 1 + ". " + question.question}
               </p>
@@ -41,12 +47,40 @@ const Contact: NextPage = () => {
           })}
         </div>
       </Modal>
+      <Modal
+        title={selectedQuestion.question}
+        modalOpen={detailedFaqModalOpen}
+        setModalOpen={setDetailedFaqModalOpen}
+      >
+        <DefaultInput
+          label="Vraag"
+          name="question"
+          value={selectedQuestion.question}
+          onChange={() => {}}
+          notRequired
+        />
+        <DefaultInput
+          label="Antwoord"
+          name="answer"
+          value={selectedQuestion.answer}
+          onChange={() => {}}
+          notRequired
+        />
+        <div className="flex gap-5 mt-10">
+          <button className="bg-red-700 text-white rounded-lg px-5 py-3 hover:cursor-pointer">
+            Verwijder vraag
+          </button>
+          <button className="bg-add-button text-white rounded-lg px-5 py-3 hover:cursor-pointer">
+            Wijzig vraag
+          </button>
+        </div>
+      </Modal>
       <h1 className="text-6xl font-extrabold mb-5">Contact pagina</h1>
 
-      <div className="flex justify-between my-10">
+      <div className="flex justify-between mt-40 mb-10">
         <h2 className="text-4xl font-semibold">FAQ</h2>
         <button
-          className="bg-add-button text-white dark:text-blacktext rounded-lg px-5 py-3 hover:cursor-pointer"
+          className="bg-add-button text-white rounded-lg px-5 py-3 hover:cursor-pointer"
           onClick={() => setFaqModalOpen(true)}
         >
           Beheer FAQ
@@ -66,7 +100,7 @@ const Contact: NextPage = () => {
       </div>
 
       <div className="my-20">
-        <h2 className="text-4xl font-semibold mb-10">Contacteer ons</h2>
+        <h2 className="text-4xl font-semibold mt-40 mb-10">Contacteer ons</h2>
         <form action="" className="flex flex-col gap-5 w-2/3">
           <div className="flex gap-10 w-full">
             <div className="flex flex-col w-1/2">
