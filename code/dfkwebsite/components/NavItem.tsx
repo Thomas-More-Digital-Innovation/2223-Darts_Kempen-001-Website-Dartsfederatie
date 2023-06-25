@@ -14,13 +14,13 @@ export default function NavItem(props: MyProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <li
-      className=" text-[#fff] xl:text-xl relative hover:children:visible w-full py-1 px-10 lg:px-0"
+      className="text-blacktext dark:text-[#fff] xl:text-xl relative hover:children:visible w-full py-1 px-10 lg:px-0"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
       <Link
         href={props.href}
-        className="capitalize  flex items-center hover:underline hover:underline-offset-[7px] hover:decoration-[3px] hover:decoration-white visible "
+        className="capitalize flex items-center hover:underline hover:underline-offset-[7px] hover:decoration-[3px] hover:decoration-white visible "
       >
         {props.title}
         {props.dropdown ? (
@@ -29,7 +29,7 @@ export default function NavItem(props: MyProps) {
       </Link>
       {props.dropdown ? (
         <div
-          className={`absolute left-full top-0 lg:top-full lg:left-0 border-l-2 rounded flex flex-col z-10 ${
+          className={`absolute left-full top-0 lg:top-full lg:left-0 shadow-md rounded flex flex-col z-10 ${
             isOpen ? "visible" : "invisible"
           }`}
         >
@@ -37,7 +37,7 @@ export default function NavItem(props: MyProps) {
             return (
               <Link
                 href={item.href}
-                className={`capitalize hover:text-gray-500 py-4 px-6 bg-nav-background ${
+                className={`capitalize hover:text-gray-300 dark:hover:text-gray-500 py-4 px-6 bg-white dark:bg-nav-background ${
                   i + 1 === row.length ? "" : "border-b border-gray-500"
                 }`}
                 key={item.title}

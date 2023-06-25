@@ -37,20 +37,20 @@ export default function ProfileMenu() {
   return (
     <div>
       <div
-        className=" text-[#fff] xl:text-xl relative hover:children:visible z-10"
+        className="text-blacktext dark:text-[#fff] xl:text-xl relative hover:children:visible z-10"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Icon
           icon="healthicons:ui-user-profile-outline"
-          className="text-5xl bg-white rounded-[50%] text-black cursor-pointer "
+          className="text-5xl rounded-[50%] cursor-pointer"
         />
         <div
-          className={`absolute top-full mt-2 border-r-2 right-0 flex flex-col ${
+          className={`absolute top-full mt-2 right-0 flex flex-col shadow-md ${
             isOpen ? "visible" : "invisible"
           } hover:children:text-gray-500 hover:children:cursor-pointer`}
         >
           <div
-            className="flex p-4 bg-nav-background border-b border-gray-500"
+            className="flex p-4 bg-white dark:bg-nav-background border-b border-black dark:border-gray-500"
             onClick={() => setShowLoginModal(!showLoginModal)}
           >
             <Icon icon="mdi:account" className="text-3xl" />
@@ -58,13 +58,13 @@ export default function ProfileMenu() {
           </div>
 
           <div
-            className="flex p-4 bg-nav-background border-b border-gray-500"
+            className="flex p-4 bg-white dark:bg-nav-background border-b border-black dark:border-gray-500"
             onClick={() => toggleDarkMode()}
           >
             <Icon icon="mdi:weather-night" className="text-3xl" />
             <p>Dark&nbsp;mode</p>
           </div>
-          <div className="flex p-4 bg-nav-background">
+          <div className="flex p-4 bg-white dark:bg-nav-background">
             <Icon icon="mdi:logout" className="text-3xl" />
             <p>Uitloggen</p>
           </div>

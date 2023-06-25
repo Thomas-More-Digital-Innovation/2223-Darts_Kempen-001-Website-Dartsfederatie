@@ -24,7 +24,7 @@ const ImageRead: FunctionComponent<imageData> = (imageData: imageData) => {
         />
       </div>
       <div
-        className={`flex flex-col text-white ${
+        className={`flex flex-col text-blacktext dark:text-white ${
           imageData.order ? "lg:order-0" : "lg:order-1 lg:text-left"
         }`}
       >
@@ -41,7 +41,7 @@ const ImageRead: FunctionComponent<imageData> = (imageData: imageData) => {
         <p className="text-xl lg:text-2xl ">{imageData.summary}</p>
 
         <Link
-          className="text-black w-fit text-xl lg:text-2xl py-4 lg:py-6 px-6 lg:px-10 mt-4 lg:mt-12 bg-blue-50 hover:bg-gray-300"
+          className="text-white dark:text-blacktext w-fit text-xl lg:text-2xl py-4 lg:py-6 px-6 lg:px-10 mt-4 lg:mt-12 bg-neutral-700 hover:bg-neutral-800 dark:bg-gray-200 dark:hover:bg-gray-300"
           href={`/info/nieuws/${imageData.title
             .toLowerCase()
             .replace(" ", "-")}`}

@@ -50,7 +50,7 @@ const AddClubModal: FunctionComponent<AddClubModalData> = (
       formValues,
       clubRegexPatterns,
       props.currentClub
-        ? `/api/club/${props.currentClub.clubID}`
+        ? `/api/clubs/${props.currentClub.clubID}`
         : "/api/clubs",
       setInformationBoxMessage,
       setHandleSubmitSuccess,
