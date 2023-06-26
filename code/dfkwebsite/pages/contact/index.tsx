@@ -46,6 +46,9 @@ const Contact: NextPage = () => {
             );
           })}
         </div>
+        <button className="bg-add-button text-white rounded-lg mt-5 px-5 py-3 hover:cursor-pointer">
+          Vraag toevoegen
+        </button>
       </Modal>
       <Modal
         title={selectedQuestion.question}
