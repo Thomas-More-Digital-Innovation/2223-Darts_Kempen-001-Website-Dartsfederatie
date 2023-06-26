@@ -1,6 +1,7 @@
 import Head from "next/head";
 import ImageRead from "../components/ImageRead";
 import { NextPage } from "next";
+import Image from "next/image";
 
 const HomePage: NextPage = () => {
   return (
@@ -24,7 +25,7 @@ const HomePage: NextPage = () => {
       </div>
 
       <div className="mt-20">
-        <h1 className="font-extrabold text-3xl sm:text-5xl mb-1 sm:mb-5 text-black dark:text-white">
+        <h1 className="font-extrabold text-2xl sm:text-3xl mb-1 sm:mb-5 text-black dark:text-white">
           Toernooi in de kijker
         </h1>
         <div className="aspect-[9/16] w-full bg-light-gray"></div>
