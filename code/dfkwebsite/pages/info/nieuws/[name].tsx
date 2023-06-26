@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { NextPage } from "next";
 
-let posts = [
+export let posts = [
   {
     title: "Post 1",
     summary:
