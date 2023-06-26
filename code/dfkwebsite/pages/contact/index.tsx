@@ -6,6 +6,7 @@ import { bestuur } from "../../data";
 import DefaultCheckbox from "../../components/DefaultCheckbox";
 import Modal from "../../components/Modal";
 import { useState } from "react";
+import Head from "next/head";
 
 const questions = [
   {
@@ -25,6 +26,10 @@ const Contact: NextPage = () => {
 
   return (
     <div className="text-blacktext dark:text-white">
+      <Head>
+        <title>DFK | Contact</title>
+        <meta name="description" content="DFK contact" />
+      </Head>
       <Modal
         title="Beheer FAQ"
         modalOpen={faqModalOpen}
