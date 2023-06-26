@@ -23,6 +23,7 @@ const Contact: NextPage = () => {
   const [faqModalOpen, setFaqModalOpen] = useState(false);
   const [detailedFaqModalOpen, setDetailedFaqModalOpen] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState(questions[0]);
+  const [addQuestionModalOpen, setAddQuestionModalOpen] = useState(false);
 
   return (
     <div className="text-blacktext dark:text-white">
@@ -51,7 +52,38 @@ const Contact: NextPage = () => {
             );
           })}
         </div>
-        <button className="bg-add-button text-white rounded-lg mt-5 px-5 py-3 hover:cursor-pointer">
+        <button
+          className="bg-add-button text-white rounded-lg mt-5 px-5 py-3 hover:cursor-pointer"
+          onClick={() => {
+            setAddQuestionModalOpen(true);
+          }}
+        >
+          Vraag toevoegen
+        </button>
+      </Modal>
+      <Modal
+        title="Vraag toevoegen"
+        modalOpen={addQuestionModalOpen}
+        setModalOpen={setAddQuestionModalOpen}
+      >
+        <DefaultInput
+          label="Vraag"
+          name="question"
+          value=""
+          onChange={() => {}}
+          notRequired
+        />
+        <DefaultInput
+          label="Antwoord"
+          name="answer"
+          value=""
+          onChange={() => {}}
+          notRequired
+          textArea
+        />
+        <button
+          className="bg-add-button text-white rounded-lg mt-5 px-5 py-3 hover:cursor-pointer"
+        >
           Vraag toevoegen
         </button>
       </Modal>
