@@ -78,3 +78,9 @@ export type TeamRanking = {
   punten: number;
   trophy?: TROPHY;
 };
+
+export type Question = {
+  questionID: number;
+  question: string;
+  answer: string;
+};
