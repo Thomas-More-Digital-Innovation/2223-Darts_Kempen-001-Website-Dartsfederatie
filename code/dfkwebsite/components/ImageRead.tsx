@@ -31,7 +31,7 @@ const ImageRead: FunctionComponent<imageData> = (imageData: imageData) => {
         <h1 className="font-extrabold text-2xl sm:text-3xl mb-1">
           {imageData.title}
         </h1>
-        <h6 className="text-white text-sm mb-6">
+        <h6 className="text-blacktext dark:text-white text-sm mb-6">
           {new Date(imageData.date).toLocaleDateString("nl-BE", {
             day: "numeric",
             month: "long",
