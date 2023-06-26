@@ -41,7 +41,7 @@ const Contact: NextPage = () => {
                   setDetailedFaqModalOpen(true);
                 }}
               >
-                {index + 1 + ". " + question.question}
+                {question.question}
               </p>
             );
           })}
@@ -65,6 +65,7 @@ const Contact: NextPage = () => {
           value={selectedQuestion.answer}
           onChange={() => {}}
           notRequired
+          textArea
         />
         <div className="flex gap-5 mt-10">
           <button className="bg-red-700 text-white rounded-lg px-5 py-3 hover:cursor-pointer">
@@ -77,7 +78,7 @@ const Contact: NextPage = () => {
       </Modal>
       <h1 className="text-6xl font-extrabold mb-5">Contact pagina</h1>
 
-      <div className="flex justify-between mt-40 mb-10">
+      <div className="flex justify-between mt-20 mb-10">
         <h2 className="text-4xl font-semibold">FAQ</h2>
         <button
           className="bg-add-button text-white rounded-lg px-5 py-3 hover:cursor-pointer"
@@ -101,46 +102,42 @@ const Contact: NextPage = () => {
 
       <div className="my-20">
         <h2 className="text-4xl font-semibold mt-40 mb-10">Contacteer ons</h2>
-        <form action="" className="flex flex-col gap-5 w-2/3">
-          <div className="flex gap-10 w-full">
-            <div className="flex flex-col w-1/2">
-              <DefaultInput
-                name="afzender"
-                label="Afzender"
-                placeholder="Afzender"
-              />
-            </div>
-            <div className="flex flex-col w-1/2">
-              <DefaultInput
-                name="email"
-                label="Email"
-                placeholder="Email"
-                type="email"
-              />
-            </div>
+        <form action="" className="grid grid-cols-2 gap-5 w-2/3">
+          <div className="">
+            <DefaultInput
+              name="afzender"
+              label="Afzender"
+              placeholder="Afzender"
+            />
           </div>
-          <div className="flex gap-10 w-full">
-            <div className="flex flex-col w-1/2">
-              <DefaultSelect
-                name="aan"
-                label="Aan"
-                options={bestuur.map((lid, index) => {
-                  return {
-                    label: `${lid.functie} (${lid.naam})`,
-                    value: index.toString(),
-                  };
-                })}
-              />
-            </div>
-            <div className="flex flex-col w-1/2">
-              <DefaultInput
-                name="onderwerp"
-                label="Onderwerp"
-                placeholder="Onderwerp"
-              />
-            </div>
+          <div className="">
+            <DefaultInput
+              name="email"
+              label="Email"
+              placeholder="Email"
+              type="email"
+            />
           </div>
-          <div className="flex flex-col w-full">
+          <div className="">
+            <DefaultSelect
+              name="aan"
+              label="Aan"
+              options={bestuur.map((lid, index) => {
+                return {
+                  label: `${lid.functie} (${lid.naam})`,
+                  value: index.toString(),
+                };
+              })}
+            />
+          </div>
+          <div className="">
+            <DefaultInput
+              name="onderwerp"
+              label="Onderwerp"
+              placeholder="Onderwerp"
+            />
+          </div>
+          <div className="col-span-2">
             <DefaultInput
               name="bericht"
               label="Bericht"
@@ -148,7 +145,7 @@ const Contact: NextPage = () => {
               textArea
             />
           </div>
-          <div className="flex items-center gap-5">
+          <div className="col-span-2">
             <DefaultCheckbox
               label="Stuur mij een kopie"
               name="kopie"
