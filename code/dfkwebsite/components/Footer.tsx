@@ -40,11 +40,11 @@ const Footer: FunctionComponent = () => {
         </p>
         <p className="pt-8">
           Gemaakt door{" "}
-          <Link href={"https://bryandeckers.com"} target="_blank"  className="hover:text-gray-400 dark:hover:text-gray-500">
+          <Link href={"https://bryandeckers.com"} target="_blank"  className="hover:text-gray-400 dark:hover:text-gray-500 underline">
             Bryan Deckers
           </Link>{" "}
           en{" "}
-          <Link href={"https://syandelbart.com"} target="_blank" className="hover:text-gray-400 dark:hover:text-gray-500">
+          <Link href={"https://syandelbart.com"} target="_blank" className="hover:text-gray-400 dark:hover:text-gray-500 underline">
             Syan Delbart
           </Link>
         </p>
