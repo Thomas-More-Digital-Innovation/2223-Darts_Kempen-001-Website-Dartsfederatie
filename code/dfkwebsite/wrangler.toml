@@ -7,6 +7,7 @@ kv_namespaces = [
   { binding = "PLAYERS", id = "785bcbe5d8894158a0f2ea1b9877c694", preview_id="785bcbe5d8894158a0f2ea1b9877c694" },
   { binding = "TEAMS", id = "08dba4bbf976463da5ecc6271b67a42c", preview_id="08dba4bbf976463da5ecc6271b67a42c" },
   { binding = "CLUBS", id = "e028c593dd954aa5be355271f1403da5", preview_id="e028c593dd954aa5be355271f1403da5" },
+  { binding = "QUESTIONS", id = "883df17e807247ad825504bd7ea2674b", preview_id="883df17e807247ad825504bd7ea2674b" },
 ]
 
 [env.prod]
@@ -16,4 +17,5 @@ kv_namespaces = [
   { binding = "PLAYERS", id = "785bcbe5d8894158a0f2ea1b9877c694"},
   { binding = "TEAMS", id = "08dba4bbf976463da5ecc6271b67a42c"},
   { binding = "CLUBS", id = "e028c593dd954aa5be355271f1403da5"},
+  { binding = "QUESTIONS", id = "883df17e807247ad825504bd7ea2674b"},
 ]
