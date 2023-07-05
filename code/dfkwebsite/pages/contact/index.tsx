@@ -142,7 +142,7 @@ const Contact: NextPage = () => {
 
       <div className="my-20">
         <h2 className="text-4xl font-semibold mt-40 mb-10">Contacteer ons</h2>
-        <form action="/api/contact" className="grid grid-cols-2 gap-5 w-2/3">
+        <form action="/api/contact" method="POST" className="grid grid-cols-2 gap-5 w-2/3">
           <div className="">
             <DefaultInput
               name="senderName"
