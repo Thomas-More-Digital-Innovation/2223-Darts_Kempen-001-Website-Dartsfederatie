@@ -142,17 +142,17 @@ const Contact: NextPage = () => {
 
       <div className="my-20">
         <h2 className="text-4xl font-semibold mt-40 mb-10">Contacteer ons</h2>
-        <form action="" className="grid grid-cols-2 gap-5 w-2/3">
+        <form action="/api/contact" className="grid grid-cols-2 gap-5 w-2/3">
           <div className="">
             <DefaultInput
-              name="afzender"
+              name="senderName"
               label="Afzender"
               placeholder="Afzender"
             />
           </div>
           <div className="">
             <DefaultInput
-              name="email"
+              name="senderEmail"
               label="Email"
               placeholder="Email"
               type="email"
@@ -172,14 +172,14 @@ const Contact: NextPage = () => {
           </div>
           <div className="">
             <DefaultInput
-              name="onderwerp"
+              name="subject"
               label="Onderwerp"
               placeholder="Onderwerp"
             />
           </div>
           <div className="col-span-2">
             <DefaultInput
-              name="bericht"
+              name="message"
               label="Bericht"
               placeholder="Bericht"
               textArea

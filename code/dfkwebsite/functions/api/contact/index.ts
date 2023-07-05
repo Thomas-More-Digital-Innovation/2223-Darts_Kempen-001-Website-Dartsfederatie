@@ -3,8 +3,10 @@ import { PagesEnv } from "../env";
 import { mailRegexPatterns, sendMail } from "../../../modules/mail";
 
 type MailSubmission = {
-  name: string;
-  email: string;
+  senderName: string;
+  senderEmail: string;
+  receiverName: string;
+  receiverEmail: string;
   message: string;
   subject: string;
 };
@@ -16,23 +18,29 @@ export const onRequestPost: PagesFunction<PagesEnv> = async ({
   try {
     let formData = await request.formData();
 
+    console.log("formData")
+    console.log(formData)
+
     let data: MailSubmission = await changeData(
       mailRegexPatterns,
       {},
       formData
     );
 
+    console.log("data")
+    console.log(data)
+
     sendMail({
-        message: data.message,
-        subject: data.subject,
-        receiver: {
-            name: "Joske paljaske",
-            email: "",
-        },
-        sender: {
-            name: data.name,
-            email: data.email,
-        },
+      message: data.message,
+      subject: data.subject,
+      receiver: {
+        name: data.receiverName,
+        email: "bryan.deckers1@gmail.com", // data.receiverEmail,
+      },
+      sender: {
+        name: data.senderName,
+        email: data.senderEmail,
+      },
     });
 
     return new Response(JSON.stringify(data), {

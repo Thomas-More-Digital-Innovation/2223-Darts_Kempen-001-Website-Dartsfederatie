@@ -1,19 +1,33 @@
 import { fieldInformation } from "./fieldsCheck";
 
 export enum MailSubmission {
-  NAME = "name",
-  EMAIL = "email",
+  SENDER_NAME = "senderName",
+  SENDER_EMAIL = "senderEmail",
+  RECEIVER_NAME = "receiverName",
+  RECEIVER_EMAIL = "receiverEmail",
   MESSAGE = "message",
   SUBJECT = "subject",
 }
 
 export const mailRegexPatterns: { [key: string]: fieldInformation } = {
-  [MailSubmission.NAME]: { regex: /^[a-zA-Z ]+$/, required: true },
-  [MailSubmission.EMAIL]: {
-    regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    required: true,
+  [MailSubmission.SENDER_NAME]: {
+    regex: /^[a-zA-Z ]{2,30}$/,
   },
-  [MailSubmission.MESSAGE]: { regex: /^[a-zA-Z0-9\s,'-]*$/, required: true },
+  [MailSubmission.SENDER_EMAIL]: {
+    regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  },
+  [MailSubmission.RECEIVER_NAME]: {
+    regex: /^[a-zA-Z ]{2,30}$/,
+  },
+  [MailSubmission.RECEIVER_EMAIL]: {
+    regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  },
+  [MailSubmission.SUBJECT]: {
+    regex: /^[a-zA-Z ]{2,30}$/,
+  },
+  [MailSubmission.MESSAGE]: {
+    regex: /^[a-zA-Z ]{2,30}$/,
+  },
 };
 
 type mailData = {
@@ -32,6 +46,8 @@ type mailData = {
 };
 
 export const sendMail = (data: mailData) => {
+  console.log("sendMail");
+  console.log(data);
   const send_request = new Request("https://api.mailchannels.net/tx/v1/send", {
     method: "POST",
     headers: {
@@ -57,4 +73,6 @@ export const sendMail = (data: mailData) => {
       ],
     }),
   });
+  console.log("send_request");
+  console.log(send_request);
 };
