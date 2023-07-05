@@ -1,5 +1,5 @@
 import Image from "next/image";
-import dfkLogo from "../public/dfklogo.png";
+import dfkLogo from "../public/DFK_logo FC.svg";
 import Link from "next/link";
 import { FunctionComponent } from "react";
 
@@ -18,7 +18,7 @@ const ImageRead: FunctionComponent<imageData> = (imageData: imageData) => {
         <Image
           src={dfkLogo}
           alt="test"
-          className={`bg-light-gray object-cover max-w-full relative overflow-hidden aspect-video `}
+          className={`bg-light-gray relative overflow-hidden aspect-video `}
           height={400}
           width={700}
         />
