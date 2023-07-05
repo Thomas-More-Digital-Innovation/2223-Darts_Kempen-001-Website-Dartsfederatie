@@ -35,7 +35,7 @@ export const onRequestPost: PagesFunction<PagesEnv> = async ({
       subject: data.subject,
       receiver: {
         name: data.receiverName,
-        email: "bryan.deckers1@gmail.com", // data.receiverEmail,
+        email: data.receiverEmail,
       },
       sender: {
         name: data.senderName,
