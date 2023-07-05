@@ -1,5 +1,5 @@
 import Image from "next/image";
-import dfkLogo from "../public/DFK_logo FC.svg";
+import dfkLogo from "../public/DFK_logo_FC.svg";
 import Link from "next/link";
 import { FunctionComponent } from "react";
 

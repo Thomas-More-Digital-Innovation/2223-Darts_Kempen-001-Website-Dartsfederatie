@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import NavItem from "./NavItem";
-import dfkLogo from "../public/DFK_logo FC.svg";
+import dfkLogo from "../public/DFK_logo_FC.svg";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { FunctionComponent, useState } from "react";
