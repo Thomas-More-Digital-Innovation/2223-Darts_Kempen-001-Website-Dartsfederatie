@@ -13,15 +13,11 @@ export const mailRegexPatterns: { [key: string]: fieldInformation } = {
   [MailSubmission.SENDER_NAME]: {
     regex: /^[a-zA-Z ]{2,30}$/,
   },
-  [MailSubmission.SENDER_EMAIL]: {
-    regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-  },
+  [MailSubmission.SENDER_EMAIL]: {},
   [MailSubmission.RECEIVER_NAME]: {
     regex: /^[a-zA-Z ]{2,30}$/,
   },
-  [MailSubmission.RECEIVER_EMAIL]: {
-    regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-  },
+  [MailSubmission.RECEIVER_EMAIL]: {},
   [MailSubmission.SUBJECT]: {
     regex: /^[a-zA-Z ]{2,30}$/,
   },
