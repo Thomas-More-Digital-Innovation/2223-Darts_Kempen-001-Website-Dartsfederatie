@@ -5,13 +5,13 @@ import DefaultCheckbox from "./DefaultCheckbox";
 import DefaultSelect from "./DefaultSelect";
 import InformationBox from "./InformationBox";
 
-type AddBestuurModalData = {
+type ShowBestuurModalData = {
   addModalOpen: boolean;
   setAddModalOpen: any;
 };
 
-const AddBestuurModal: FunctionComponent<AddBestuurModalData> = (
-  props: AddBestuurModalData
+const ShowBestuurModal: FunctionComponent<ShowBestuurModalData> = (
+  props: ShowBestuurModalData
 ) => {
   const [handleSubmitSuccess, setHandleSubmitSuccess] = useState<
     boolean | null
@@ -70,4 +70,4 @@ const AddBestuurModal: FunctionComponent<AddBestuurModalData> = (
   );
 };
 
-export default AddBestuurModal;
+export default ShowBestuurModal;
