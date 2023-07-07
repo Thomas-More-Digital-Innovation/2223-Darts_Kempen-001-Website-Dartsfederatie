@@ -33,9 +33,9 @@ const Nieuws: NextPage = () => {
         date={news[0].date}
       />
 
-      <div className="grid grid-cols-4 gap-8 mt-20">
+      <div className="grid grid-cols-4 gap-8 mt-20 text-blacktext dark:text-white">
         {news.slice(1).map((news) => (
-          <div className="w-full relative">
+          <div className="w-full relative" key={news.title}>
             <div className="w-full h-[250px] relative">
               <Image
                 className="bg-light-gray object-contain"
@@ -44,14 +44,14 @@ const Nieuws: NextPage = () => {
                 fill
               ></Image>
             </div>
-            <h1 className="font-bold text-4xl mt-4 text-white">{news.title}</h1>
-            <h6 className="text-white text-sm">
+            <h1 className="font-bold text-4xl mt-4">{news.title}</h1>
+            <h6 className="text-sm">
               {new Date(news.date).toLocaleDateString()}
             </h6>
-            <p className="text-white mt-6">{news.summary}</p>
+            <p className="mt-6">{news.summary}</p>
 
             <Link
-              className="inline-block py-4 px-6 mt-4 bg-blue-50"
+              className="inline-block py-4 px-6 mt-4 text-white dark:text-blacktext bg-neutral-700 hover:bg-neutral-800 dark:bg-gray-200 dark:hover:bg-gray-300"
               href={`/info/nieuws/${news.title
                 .toLowerCase()
                 .replace(" ", "-")}`}
