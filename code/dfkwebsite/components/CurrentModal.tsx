@@ -24,8 +24,8 @@ type CurrentModalData = {
   setCurrentModal: Function;
   children?: (item: any) => JSX.Element;
   addTeams?: boolean;
-  addTeamModalOpen?: boolean;
-  setAddTeamModalOpen?: Dispatch<SetStateAction<boolean>>;
+  ShowTeamModalOpen?: boolean;
+  setShowTeamModalOpen?: Dispatch<SetStateAction<boolean>>;
 };
 
 const CurrentModal: FunctionComponent<CurrentModalData> = ({
@@ -35,8 +35,8 @@ const CurrentModal: FunctionComponent<CurrentModalData> = ({
   setCurrentModal,
   children,
   addTeams,
-  addTeamModalOpen,
-  setAddTeamModalOpen,
+  ShowTeamModalOpen,
+  setShowTeamModalOpen,
 }) => {
   const [teams, setTeams] = useState<TeamFront[]>([]);
 
@@ -83,8 +83,8 @@ const CurrentModal: FunctionComponent<CurrentModalData> = ({
           <div className="mt-10 w-1/2">
             <AddButton
               name="Team toevoegen"
-              addModalOpen={addTeamModalOpen}
-              setAddModalOpen={setAddTeamModalOpen}
+              addModalOpen={ShowTeamModalOpen}
+              setAddModalOpen={setShowTeamModalOpen}
             />
           </div>
         )}

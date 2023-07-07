@@ -9,15 +9,15 @@ import { Player, PlayerFront } from "../types/player";
 import * as dummyData from "../data";
 import SubmitButton from "./SubmitButton";
 
-type AddSpelerModalData = {
+type ShowPlayerModalData = {
   addModalOpen: boolean;
   setAddModalOpen: any;
   players: Player[];
   setPlayers: Dispatch<React.SetStateAction<PlayerFront[]>>;
 };
 
-const AddSpelerModal: FunctionComponent<AddSpelerModalData> = (
-  props: AddSpelerModalData
+const ShowPlayerModal: FunctionComponent<ShowPlayerModalData> = (
+  props: ShowPlayerModalData
 ) => {
   const [formValues, setFormValues] = useState<{ [key: string]: string }>({
     firstname: "",
@@ -114,4 +114,4 @@ const AddSpelerModal: FunctionComponent<AddSpelerModalData> = (
   );
 };
 
-export default AddSpelerModal;
+export default ShowPlayerModal;
