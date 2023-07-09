@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
-import AddBestuurModal from "../../../components/AddBestuurModal";
+import ShowBestuurModal from "../../../components/ShowBestuurModal";
 import OverzichtTopBar from "../../../components/OverzichtTopBar";
 import * as dummyData from "../../../data";
 import ManagementCard from "../../../components/ManagementCard";
@@ -26,7 +26,7 @@ const Bestuur: NextPage = () => {
         <title>DFK | Bestuur</title>
         <meta name="description" content="DFK bestuur" />
       </Head>
-      <AddBestuurModal
+      <ShowBestuurModal
         addModalOpen={addModalOpen}
         setAddModalOpen={setAddModalOpen}
       />

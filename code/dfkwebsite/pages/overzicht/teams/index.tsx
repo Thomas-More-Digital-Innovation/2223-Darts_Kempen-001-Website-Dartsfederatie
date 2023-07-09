@@ -2,14 +2,9 @@ import { useEffect, useState } from "react";
 import { NextPage } from "next";
 import * as dummyData from "../../../data";
 import OverzichtTopBar from "../../../components/OverzichtTopBar";
-import AddTeamModal from "../../../components/AddTeamModal";
+import ShowTeamModal from "../../../components/ShowTeamModal";
 import TeamCard from "../../../components/TeamCard";
-import TeamSpelers from "../../../components/TeamSpelers";
 import { TeamFront } from "../../../types/team";
-import {
-  handleDeletePlayerFromTeam,
-  handleMakePlayerCaptain,
-} from "../../../modules/overzicht";
 import SearchableCardGrid from "../../../components/SearchableCardGrid";
 import CurrentModal from "../../../components/CurrentModal";
 import Head from "next/head";
@@ -35,8 +30,8 @@ const Teams: NextPage = () => {
         <title>DFK | Teams</title>
         <meta name="description" content="DFK teams" />
       </Head>
-      {/* Add Team Modal */}
-      <AddTeamModal
+      {/* Show Team Modal */}
+      <ShowTeamModal
         addModalOpen={addModalOpen}
         setAddModalOpen={setAddModalOpen}
         teams={teams}

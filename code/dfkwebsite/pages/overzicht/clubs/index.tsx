@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { NextPage } from "next";
 import ClubCard from "../../../components/ClubCard";
 import OverzichtTopBar from "../../../components/OverzichtTopBar";
-import AddClubModal from "../../../components/ShowClubModal";
+import ShowClubModal from "../../../components/ShowClubModal";
 import { ClubFront } from "../../../types/club";
 import * as dummyData from "../../../data";
-import AddTeamModal from "../../../components/AddTeamModal";
+import ShowTeamModal from "../../../components/ShowTeamModal";
 import SearchableCardGrid from "../../../components/SearchableCardGrid";
 import CurrentModal from "../../../components/CurrentModal";
 import Head from "next/head";
@@ -16,7 +16,7 @@ const Clubs: NextPage = () => {
   const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
-  const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
+  const [ShowTeamModalOpen, setShowTeamModalOpen] = useState(false);
 
   console.log(currentClub);
 
@@ -34,8 +34,8 @@ const Clubs: NextPage = () => {
         <title>DFK | Clubs</title>
         <meta name="description" content="DFK clubs" />
       </Head>
-      {/* Add Club Modal */}
-      <AddClubModal
+      {/* Show Club Modal */}
+      <ShowClubModal
         addModalOpen={addModalOpen}
         setAddModalOpen={setAddModalOpen}
         clubs={clubs}
@@ -60,15 +60,15 @@ const Clubs: NextPage = () => {
           currentModalOpen={isOpen}
           setCurrentModal={setIsOpen}
           addTeams={true}
-          addTeamModalOpen={addTeamModalOpen}
-          setAddTeamModalOpen={setAddTeamModalOpen}
+          ShowTeamModalOpen={ShowTeamModalOpen}
+          setShowTeamModalOpen={setShowTeamModalOpen}
         />
       )}
 
       {/* This is for inside the current modal when adding a team to the club */}
-      <AddTeamModal
-        addModalOpen={addTeamModalOpen}
-        setAddModalOpen={setAddTeamModalOpen}
+      <ShowTeamModal
+        addModalOpen={ShowTeamModalOpen}
+        setAddModalOpen={setShowTeamModalOpen}
         currentClub={currentClub}
         showTeamList={true}
       />

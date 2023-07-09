@@ -14,6 +14,18 @@ export type Player = {
   deleted?: boolean;
 };
 
+export interface Bestuur extends Player {
+  function: PlayerFunction;
+  email: string;
+}
+
+export enum PlayerFunction {
+  VOORZITTER = "Voorzitter",
+  SECRETARIS = "Secretaris",
+  PENNINGMEESTER = "Penningmeester",
+  ALGEMEEN_BESTUURSLID = "Algemeen bestuurslid",
+}
+
 export interface PlayerFront extends Player {
   teams?: Team[];
   fines?: Fine[];

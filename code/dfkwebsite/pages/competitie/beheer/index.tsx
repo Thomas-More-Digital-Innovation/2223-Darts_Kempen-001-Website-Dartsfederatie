@@ -24,13 +24,16 @@ interface TableData {
   team2: string;
 }
 
-type columnType = {
+export type columnType = {
   name: string;
-  selector: (row: Competition) => any;
   sortable?: boolean;
   filterable?: boolean;
   grow?: number;
 };
+
+interface competitionColumnType extends columnType {
+  selector: (row: Competition) => any;
+}
 
 const Clubs: NextPage = () => {
   const router = useRouter();
@@ -159,7 +162,7 @@ const Clubs: NextPage = () => {
 
   let competitionCount = 0;
 
-  const columns: Array<columnType> = [
+  const columns: Array<competitionColumnType> = [
     {
       name: "ID",
       selector: (row) => {
