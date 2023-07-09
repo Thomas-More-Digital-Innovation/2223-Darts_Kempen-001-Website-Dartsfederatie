@@ -4,7 +4,6 @@ import { posts } from "./[name]";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { News } from "../../../types/general";
 import Head from "next/head";
 
 const Nieuws: NextPage = () => {

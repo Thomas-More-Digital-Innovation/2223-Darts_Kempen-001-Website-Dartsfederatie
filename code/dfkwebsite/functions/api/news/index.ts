@@ -5,7 +5,7 @@ import {
 } from "../../../modules/general";
 import { PagesEnv } from "../env";
 import { NewsSubmission, newsRegexPatterns } from "../../../modules/news";
-import { News } from "../../../types/general";
+import { News } from "../../../types/news";
 
 export const onRequestGet: PagesFunction<PagesEnv> = async ({
   request,

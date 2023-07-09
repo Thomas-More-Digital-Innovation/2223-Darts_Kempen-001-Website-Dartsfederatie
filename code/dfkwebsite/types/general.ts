@@ -12,13 +12,7 @@ export enum ENTITY {
   CLUB = 2,
 }
 
-export type News = {
-  newsID: string;
-  title: string;
-  description: string;
-  date: number;
-  text: string;
-};
+
 
 export type PlayerTeam = {
   id: string;
