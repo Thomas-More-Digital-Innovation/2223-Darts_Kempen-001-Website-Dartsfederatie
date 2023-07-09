@@ -2,6 +2,9 @@ export type News = {
   newsID: string;
   title: string;
   description: string;
-  date: number;
+  datePublished: number;
   text: string;
+  authorID: string;
+  dateCreated: number;
+  deleted?: boolean;
 };

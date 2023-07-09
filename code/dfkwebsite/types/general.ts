@@ -12,8 +12,6 @@ export enum ENTITY {
   CLUB = 2,
 }
 
-
-
 export type PlayerTeam = {
   id: string;
   playerID: string;
