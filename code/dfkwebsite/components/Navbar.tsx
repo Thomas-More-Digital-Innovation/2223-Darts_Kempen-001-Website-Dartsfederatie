@@ -81,7 +81,7 @@ const routes = [
 const Navbar: FunctionComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="px-10 lg:px-20 py-5 flex flex-wrap justify-between items-center relative">
+    <nav className="py-5 flex flex-wrap justify-between items-center relative">
       <Icon
         icon="mdi:hamburger-menu"
         className="lg:hidden text-6xl text-blacktext dark:text-white order-0 lg:order-1"

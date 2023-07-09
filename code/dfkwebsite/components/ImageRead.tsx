@@ -13,14 +13,14 @@ type imageData = {
 
 const ImageRead: FunctionComponent<imageData> = (imageData: imageData) => {
   return (
-    <div className="grid w-full grid-cols-1 lg:grid-cols-2 gap-5 mb-10">
+    <div className="grid w-full grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
       <div className={`${imageData.order ? "lg:order-1" : "lg:order-0"}`}>
         <Image
           src={dfkLogo}
           alt="test"
-          className={`bg-light-gray relative overflow-hidden aspect-video `}
+          className={`relative overflow-hidden aspect-video `}
           height={400}
-          width={600}
+          width={500}
         />
       </div>
       <div

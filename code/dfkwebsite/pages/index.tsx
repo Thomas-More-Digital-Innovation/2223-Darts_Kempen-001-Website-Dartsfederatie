@@ -28,7 +28,7 @@ const HomePage: NextPage = () => {
         <h1 className="font-extrabold text-2xl sm:text-3xl mb-1 sm:mb-5 text-black dark:text-white">
           Toernooi in de kijker
         </h1>
-        <div className="aspect-[9/16] w-full bg-light-gray"></div>
+        <div className="aspect-[16/9] w-full bg-light-gray"></div>
       </div>
     </div>
   );

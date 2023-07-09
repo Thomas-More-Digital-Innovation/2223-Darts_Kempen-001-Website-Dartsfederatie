@@ -10,11 +10,11 @@ const montserrat = Montserrat({
 
 export default function Layout({ children }: any) {
   return (
-    <main className={`${montserrat.className} bg-white text-blacktext dark:bg-background`}>
+    <main className={`${montserrat.className} bg-white text-blacktext dark:bg-background container mx-auto`}>
       <Navbar />
-      <main className="py-32 container mx-auto px-4 sm:px-0">
+      <div className="py-32 px-4 sm:px-0">
         {children}
-      </main>
+      </div>
       <Footer />
     </main>
   );

@@ -6,7 +6,7 @@ import { FunctionComponent } from "react";
 
 const Footer: FunctionComponent = () => {
   return (
-    <footer className="bg-white dark:bg-footer-background flex flex-col px-10 lg:px-20 py-10 text-blacktext dark:text-white">
+    <footer className="bg-white dark:bg-footer-background flex flex-col py-10 text-blacktext dark:text-white">
       <div className="flex flex-row items-top gap-10 lg:gap-0 justify-between items-top flex-wrap">
         <div className="order-0">
           <h1 className="text-2xl mb-1">Navigatie</h1>
