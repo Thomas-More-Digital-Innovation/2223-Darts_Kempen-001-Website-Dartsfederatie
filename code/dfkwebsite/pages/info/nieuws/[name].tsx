@@ -2,56 +2,57 @@ import ImageRead from "../../../components/ImageRead";
 import Image from "next/image";
 import Link from "next/link";
 import { NextPage } from "next";
+import { News } from "../../../types/news";
 
-export let posts = [
+export let posts : News[] = [
   {
     title: "Post 1",
-    summary:
+    text:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     src: "/dfklogo.png",
     srcAlt: "test",
-    date: 1,
-    key: 1,
+    datePublished: 1,
+    newsID: "1",
   },
   {
     title: "Post 2",
-    summary:
+    text:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     src: "/dfklogo.png",
     srcAlt: "test",
-    date: 2,
-    key: 2,
+    datePublished: 2,
+    newsID: "2",
   },
   {
     title: "Post 3",
-    summary:
+    text:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     src: "/dfklogo.png",
     srcAlt: "test",
-    date: 3,
-    key: 3,
+    datePublished: 3,
+    newsID: "3",
   },
   {
     title: "Post 4",
-    summary:
+    text:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     src: "/dfklogo.png",
     srcAlt: "test",
-    date: 4,
-    key: 4,
+    datePublished: 4,
+    newsID: "4",
   },
   {
     title: "Post 5",
-    summary:
+    text:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     src: "/dfklogo.png",
     srcAlt: "test",
-    date: 5,
-    key: 5,
+    datePublished: 5,
+    newsID: "5",
   },
 ];
 
-posts.sort((a, b) => b.date - a.date);
+posts.sort((a, b) => b.datePublished - a.datePublished);
 
 const Nieuws: NextPage = () => {
   return (
@@ -63,14 +64,14 @@ const Nieuws: NextPage = () => {
       </h1>
       <ImageRead
         title={posts[0].title}
-        summary={posts[0].summary}
+        summary={posts[0].text}
         src={posts[0].src}
-        date={posts[0].date}
+        date={posts[0].datePublished}
       />
 
       <div className="grid grid-cols-4 gap-8">
         {posts.slice(1).map((post) => (
-          <div className="w-full relative" key={post.key}>
+          <div className="w-full relative" key={post.newsID}>
             <div className="w-full h-[250px] relative">
               <Image
                 className="bg-[#676767] object-contain"
@@ -81,9 +82,9 @@ const Nieuws: NextPage = () => {
             </div>
             <h1 className="font-bold text-4xl mt-4 text-white">{post.title}</h1>
             <h6 className="text-white text-sm">
-              {new Date(post.date).toLocaleDateString()}
+              {new Date(post.datePublished).toLocaleDateString()}
             </h6>
-            <p className="text-white mt-6">{post.summary}</p>
+            <p className="text-white mt-6">{post.text}</p>
 
             <Link
               className="inline-block py-4 px-6 mt-4 bg-blue-50"
