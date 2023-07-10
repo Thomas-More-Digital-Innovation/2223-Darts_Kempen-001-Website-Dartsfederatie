@@ -13,13 +13,25 @@ export enum COMPETITION_TYPE {
   TROPHY = "TROPHY",
 }
 
-export type Competition = {
+export type CompetitionWrapper = {
   competitionID: string;
   name: string;
-  type: COMPETITION_TYPE;
-  classification: CLASSIFICATION;
   startDate: number;
   endDate: number;
+  dateCreated: number;
+  dateLastModified: number;
+  type: COMPETITION_TYPE;
+  competitionIDs: string[];
+};
+
+export interface CompetitionWrapperFront extends CompetitionWrapper {
+  competitions: Competition[];
+}
+
+export type Competition = {
+  competitionID: string;
+
+  classification: CLASSIFICATION;
   playdays?: TableData[][];
   teamsID?: Array<string>;
   deleted?: boolean;
