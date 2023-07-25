@@ -9,7 +9,7 @@ import {
   getParams,
 } from "../../../modules/general";
 import { teams, competitions } from "../../../data";
-import { Competition } from "../../../types/competition";
+import { CompetitionPartialFront } from "../../../types/competition";
 import DefaultSelect from "../../../components/DefaultSelect";
 import { getTeams } from "../../../modules/team";
 import * as dummyData from "../../../data";
@@ -28,7 +28,7 @@ const GeneratePlaydays: NextPage = () => {
   // const endDate = new Date(params.endDate);
 
   const [competitionInfo, setCompetitionInfo] = useState<
-    Competition | undefined
+    CompetitionPartialFront | undefined
   >(undefined);
 
   const [amountTeams, setAmountTeams] = useState<number>(0);
@@ -36,7 +36,7 @@ const GeneratePlaydays: NextPage = () => {
   const [tableData, setTableData] = useState<TableData[][]>([]);
 
   const handleAmountTeamsChange = (
-    competitionInfo: Competition,
+    competitionInfo: CompetitionPartialFront,
     teamAmount?: number
   ): void => {
     const teamCount = teamAmount || amountTeams;
@@ -44,8 +44,8 @@ const GeneratePlaydays: NextPage = () => {
     if (!competitionInfo) return;
 
     const maxRows = countFridays(
-      new Date(competitionInfo?.startDate),
-      new Date(competitionInfo?.endDate)
+      new Date(competitionInfo?.competition.startDate),
+      new Date(competitionInfo?.competition.endDate)
     );
 
     const newData: TableData[][] = [];
@@ -118,7 +118,7 @@ const GeneratePlaydays: NextPage = () => {
           `/api/competition/${params.competitionID}`
         )
           .then((competition) => competition.json())
-          .then((parsedCompetition: Competition) => {
+          .then((parsedCompetition: CompetitionPartialFront) => {
             setCompetitionInfo(parsedCompetition);
             if (parsedCompetition.playdays)
               setTableData(parsedCompetition.playdays);
@@ -150,7 +150,7 @@ const GeneratePlaydays: NextPage = () => {
           currentCompetition,
           currentCompetition?.teamsID?.length
         );
-        console.log("copetition teams", competitionTeams);
+        console.log("competition teams", competitionTeams);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -171,7 +171,7 @@ const GeneratePlaydays: NextPage = () => {
           setAmountTeams(selectedOptions.length);
 
           handleAmountTeamsChange(
-            competitionInfo as Competition,
+            competitionInfo as CompetitionPartialFront,
             selectedOptions.length
           );
 
@@ -203,10 +203,10 @@ const GeneratePlaydays: NextPage = () => {
               <p>
                 {new Date(
                   getNextFriday(
-                    new Date(competitionInfo?.startDate ?? 0)
+                    new Date(competitionInfo?.competition.startDate ?? 0)
                   ).setDate(
                     getNextFriday(
-                      new Date(competitionInfo?.endDate ?? 0)
+                      new Date(competitionInfo?.competition.endDate ?? 0)
                     ).getDate() +
                       7 * rowIndex
                   )

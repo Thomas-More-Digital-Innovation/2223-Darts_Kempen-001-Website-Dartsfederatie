@@ -197,7 +197,7 @@ const Clubs: NextPage = () => {
     },
     {
       name: "Aantal teams",
-      selector: (row) => row?.teamsID?.length || 0,
+      selector: (row) => row.teamAmount || 0,
       sortable: true,
       filterable: true,
       grow: 2,
