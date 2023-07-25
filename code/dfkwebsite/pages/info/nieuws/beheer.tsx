@@ -2,27 +2,27 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { News } from "../../../types/news";
+import { Post, PostFront } from "../../../types/posts";
 import { posts } from "./[name]";
 import { columnType } from "../../competitie/beheer";
 import { Icon } from "@iconify/react";
 import { set } from "lodash";
 
 const NieuwsBeheer: NextPage = () => {
-  const [news, setNews] = useState<News[]>([]);
+  const [posts, setPosts] = useState<PostFront[]>([]);
 
-  let newsCount = 0;
+  let postCount = 0;
 
-  interface newsColumnType extends columnType {
-    selector: (row: News) => any;
+  interface postColumnType extends columnType {
+    selector: (row: PostFront) => any;
   }
 
-  const columns: Array<newsColumnType> = [
+  const columns: Array<postColumnType> = [
     {
       name: "ID",
       selector: (row) => {
-        newsCount++;
-        return newsCount;
+        postCount++;
+        return postCount;
       },
       sortable: true,
       filterable: true,
@@ -36,11 +36,13 @@ const NieuwsBeheer: NextPage = () => {
     {
       name: "Datum gepubliceerd",
       selector: (row) =>
-        new Date(row.datePublished).toLocaleDateString("nl-BE", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        }),
+        row.datePublished
+          ? new Date(row.datePublished).toLocaleDateString("nl-BE", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })
+          : "Niet gepubliceerd",
       sortable: true,
       filterable: true,
       grow: 2,
@@ -51,7 +53,7 @@ const NieuwsBeheer: NextPage = () => {
         <div className="flex gap-3 flex-nowrap">
           <Icon
             className="cursor-pointer text-2xl"
-            onClick={() => onClickDelete(row.newsID)}
+            onClick={() => onClickDelete(row.postID)}
             icon="mdi:delete"
           />
         </div>
@@ -62,12 +64,12 @@ const NieuwsBeheer: NextPage = () => {
 
   const onClickDelete = (id: string) => {
     if (confirm("Ben je zeker dat je dit nieuwsbericht wilt verwijderen?")) {
-      fetch(`/api/news/${id}`, {
+      fetch(`/api/post/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
         .then((res) => {
-          setNews(news.filter((news) => news.newsID !== id));
+          setPosts(posts.filter((post) => post.postID !== id));
         })
         .catch((err) => console.log(err));
     }
@@ -75,12 +77,12 @@ const NieuwsBeheer: NextPage = () => {
 
   useEffect(() => {
     if (!process.env.NEXT_PUBLIC_NO_API) {
-      fetch(`/api/news`)
-        .then((news) => news.json())
-        .then((parsedNews) => setNews(parsedNews))
+      fetch(`/api/post`)
+        .then((post) => post.json())
+        .then((parsedpost) => setPosts(parsedpost))
         .catch((err) => console.log(err));
     } else {
-      setNews(posts);
+      setPosts(posts);
     }
   }, []);
   return (
@@ -93,7 +95,7 @@ const NieuwsBeheer: NextPage = () => {
         Nieuws beheer
       </h1>
 
-      <DataTable title="Nieuws" columns={columns} data={news} pagination />
+      <DataTable title="Nieuws" columns={columns} data={posts} pagination />
     </div>
   );
 };
