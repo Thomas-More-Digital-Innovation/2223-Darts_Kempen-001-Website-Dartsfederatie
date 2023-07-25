@@ -1,10 +1,10 @@
 import { NextPage } from "next";
-import DefaultCheckbox from "../../../components/DefaultCheckbox";
+import DefaultCheckbox from "@/components/DefaultCheckbox";
 import { ChangeEvent, useEffect, useState } from "react";
-import { SelectOption, getParams } from "../../../modules/general";
+import { SelectOption, getParams } from "@/modules/general";
 import { useRouter } from "next/router";
 import {
-  Competition,
+  CompetitionPartialFront,
   Playday,
   SCORETYPE,
   Score,
@@ -19,7 +19,8 @@ import { PlayerFront } from "../../../types/player";
 import { getPlayers } from "../../../modules/player";
 
 const WedstrijdbladBeheer: NextPage = () => {
-  const [competition, setCompetition] = useState<Competition | null>(null);
+  const [competition, setCompetition] =
+    useState<CompetitionPartialFront | null>(null);
   const [playday, setPlayday] = useState<TableData[]>([]);
   const [teamHome, setHome] = useState<TeamFront | null>(null);
   const [teamHomeSelects, setTeamHomeSelects] = useState<SelectOption[] | null>(
@@ -72,7 +73,7 @@ const WedstrijdbladBeheer: NextPage = () => {
 
     fetch(`/api/competition/${params.competitionID}`)
       .then((res) => res.json())
-      .then((parsedCompetition: Competition) => {
+      .then((parsedCompetition: CompetitionPartialFront) => {
         if (!parsedCompetition) {
           console.log("No competition found");
           return;
@@ -344,8 +345,8 @@ const WedstrijdbladBeheer: NextPage = () => {
           Datum: 30-09-2022
         </p> */}
         <p className="col-span-2 text-center font-semibold text-3xl pl-0">
-          Reeks: / - {competition?.startDate} - {competition?.classification}{" "}
-          Speeldag: / - Datum: /
+          Reeks: / - {competition?.competition.startDate} -{" "}
+          {competition?.classification} Speeldag: / - Datum: /
         </p>
         <p className="text-lg font-semibold">THUISSPELERS: {teamHome?.name}</p>
         <p className="text-lg font-semibold">BEZOEKERS: {teamAway?.name}</p>

@@ -15,17 +15,31 @@ export enum COMPETITION_TYPE {
 
 export type Competition = {
   competitionID: string;
-  name: string;
-  type: COMPETITION_TYPE;
-  classification: CLASSIFICATION;
+  teamAmount: number;
   startDate: number;
   endDate: number;
+  dateCreated: number;
+  dateLastModified: number;
+  classification: string[];
+  type: COMPETITION_TYPE;
+  competitionIDs: string[];
+};
+
+export interface CompetitionFront extends Competition {
+  competitions: CompetitionPartial[];
+}
+
+export type CompetitionPartial = {
+  competitionPartialID: string;
+  competitionID: string;
+  classification: CLASSIFICATION;
   playdays?: TableData[][];
   teamsID?: Array<string>;
   deleted?: boolean;
 };
 
-export interface CompetitionFront extends Competition {
+export interface CompetitionPartialFront extends CompetitionPartial {
+  competition: Competition;
   teams: Team[];
 }
 

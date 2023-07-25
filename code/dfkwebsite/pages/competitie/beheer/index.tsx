@@ -200,7 +200,7 @@ const Clubs: NextPage = () => {
     },
     {
       name: "Aantal teams",
-      selector: (row) => row?.teamsID?.length || 0,
+      selector: (row) => row.teamAmount || 0,
       sortable: true,
       filterable: true,
       grow: 2,
@@ -279,6 +279,13 @@ const Clubs: NextPage = () => {
     }
   }, []);
 
+  const handleSelectChange = (
+    value: { value: string; label: string }[],
+    action: { action: string; name: string }
+  ) => {
+    formHandler.handleChangeSelect(value, action, setFormValues, formValues);
+  };
+
   const [handleSubmitSuccess, setHandleSubmitSuccess] = useState<
     boolean | null
   >(false);
@@ -300,20 +307,22 @@ const Clubs: NextPage = () => {
           {informationBoxMessage}
         </InformationBox>
         <div>
-          <DefaultInput
-            name="startdate"
-            label="Start datum"
-            type="date"
-            value={formValues.startdate}
-            onChange={handleChange}
-          />
-          <DefaultInput
-            name="enddate"
-            label="Eind datum"
-            type="date"
-            value={formValues.enddate}
-            onChange={handleChange}
-          />
+          <div className="flex flex-row gap-2 children:w-full">
+            <DefaultInput
+              name="startdate"
+              label="Start datum"
+              type="date"
+              value={formValues.startdate}
+              onChange={handleChange}
+            />
+            <DefaultInput
+              name="enddate"
+              label="Eind datum"
+              type="date"
+              value={formValues.enddate}
+              onChange={handleChange}
+            />
+          </div>
 
           {formValues.enddate && formValues.startdate && (
             <p className="max-w-sm pt-2">
@@ -328,13 +337,22 @@ const Clubs: NextPage = () => {
             </p>
           )}
 
+          <DefaultInput
+            name="teamAmount"
+            label="Aantal teams"
+            type="number"
+            value={formValues.teamAmount}
+            onChange={handleChange}
+          />
+
           <div className="flex flex-col">
             <DefaultSelect
               name="classification"
               id="classification"
-              label="Classificatie"
-              value={formValues.classification}
-              onChange={handleChange}
+              label="Classificaties"
+              multiple
+              search
+              onSelectChange={handleSelectChange}
               options={Object.values(CLASSIFICATION).map((value) => {
                 return {
                   value: value,

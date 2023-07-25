@@ -9,6 +9,21 @@ import { PlayerFront } from "./types/player";
 import { TeamFront } from "./types/team";
 import { User } from "./types/user";
 
+export const competitions: Array<Competition> = [
+  {
+    competitionID: "id:dummy:1",
+    type: COMPETITION_TYPE.COMPETITION,
+    startDate: 0,
+    endDate: 0,
+    dateCreated: 0,
+    dateLastModified: 0,
+    classification: [CLASSIFICATION.PROVINCIAAL],
+    competitionIDs: [""],
+    teamAmount: 5,
+  },
+];
+
+
 export const players: Array<PlayerFront> = [
   {
     firstName: "Bryan",

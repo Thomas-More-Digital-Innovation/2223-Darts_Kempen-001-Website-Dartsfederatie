@@ -8,15 +8,16 @@ export enum CompetitionSubmission {
   ENDDATE = "enddate",
   TEAMS = "teamsID",
   PLAYDAYS = "playdays",
+  TEAMSAMOUNT = "teamAmount",
 }
 
 export const competitionRegexPatterns: { [key: string]: fieldInformation } = {
-  [CompetitionSubmission.NAME]: { regex: /^[a-zA-Z ]+$/, required: false },
   [CompetitionSubmission.TYPE]: {
     required: true,
   },
   [CompetitionSubmission.CLASSIFICATION]: {
     required: true,
+    castFunction: JSON.parse,
   },
   [CompetitionSubmission.STARTDATE]: {
     required: true,
@@ -31,6 +32,10 @@ export const competitionRegexPatterns: { [key: string]: fieldInformation } = {
   [CompetitionSubmission.PLAYDAYS]: {
     required: false,
     castFunction: JSON.parse,
+  },
+  [CompetitionSubmission.TEAMSAMOUNT]: {
+    required: false,
+    castFunction: Number,
   },
 };
 
