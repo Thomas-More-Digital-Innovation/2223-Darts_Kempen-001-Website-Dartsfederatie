@@ -11,11 +11,14 @@ import { TeamFront } from "./types/team";
 export const competitions: Array<Competition> = [
   {
     competitionID: "id:dummy:1",
-    name: "competitie 1",
     type: COMPETITION_TYPE.COMPETITION,
-    classification: CLASSIFICATION.PROVINCIAAL,
     startDate: 0,
     endDate: 0,
+    dateCreated: 0,
+    dateLastModified: 0,
+    classification: [CLASSIFICATION.PROVINCIAAL],
+    competitionIDs: [""],
+    teamAmount: 5,
   },
 ];
 
