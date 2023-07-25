@@ -45,18 +45,15 @@ export const onRequestPost: PagesFunction<PagesEnv> = async ({
   try {
     let formData = await request.formData();
 
-    checkFields(formData, postRegexPatterns);
-
-    const name = formData.get(PostSubmission.NAME);
-
     const postIdKey = `id:${Date.now()}`;
 
-    let data: Post = {
-      // TODO: Add fields here
-    };
+    let data: Post = await changeData(
+      postRegexPatterns,
+      { postID: postIdKey },
+      formData
+    );
 
     await env.POSTS.put(postIdKey, JSON.stringify(data));
-    await searchKeyChecker(env.POSTS, postIdKey, `name:${name}`);
 
     return new Response(JSON.stringify(data), {
       status: 200,
@@ -66,54 +63,6 @@ export const onRequestPost: PagesFunction<PagesEnv> = async ({
     return new Response(JSON.stringify({ error: e.message }), {
       status: 500,
       headers: { "content-type": "application/json" },
-    });
-  }
-};
-
-export const onRequestPut: PagesFunction<PagesEnv> = async ({
-  request,
-  env,
-}) => {
-  try {
-    const formData = await request.formData();
-
-    checkFields(formData, postRegexPatterns, true);
-
-    const params = getParams(request.url);
-
-    const posts = await env.POSTS.list({
-      limit: params.limit,
-      cursor: params.cursor,
-    });
-
-    // Update each post using the form data
-    const updates = posts.keys.map(async (post) => {
-      const postData: Post = JSON.parse(await env.POSTS.get(post.name));
-
-      const data: Post = (await changeData(
-        postRegexPatterns,
-        postData,
-        formData
-      )) as Post;
-
-      // Update the team data in the KV store
-      await env.POSTS.put(post.name, JSON.stringify(data));
-    });
-
-    // Wait for all updates to complete
-    let result = await Promise.all(updates);
-
-    return new Response(JSON.stringify(result), {
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (e) {
-    const errorBody = {
-      message: e instanceof Error ? e.message : "Internal server error.",
-      status: e instanceof Error ? 500 : 400,
-    };
-
-    return new Response(JSON.stringify(errorBody), {
-      headers: { "Content-Type": "application/json" },
     });
   }
 };
