@@ -13,4 +13,5 @@ export interface PagesEnv {
     DOCUMENTS: KVNamespace;
     USERS: KVNamespace;
     FINES: KVNamespace;
+    QUESTIONS: KVNamespace;
 }

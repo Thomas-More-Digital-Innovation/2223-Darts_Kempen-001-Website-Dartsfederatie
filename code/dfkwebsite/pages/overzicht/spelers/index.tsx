@@ -1,11 +1,11 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
-import AddSpelerModal from "../../../components/AddSpelerModal";
+import ShowPlayerModal from "../../../components/ShowPlayerModal";
 import OverzichtTopBar from "../../../components/OverzichtTopBar";
 import PlayerCard from "../../../components/PlayerCard";
 import { PlayerFront } from "../../../types/player";
 import * as dummyData from "../../../data";
-import AddTeamModal from "../../../components/AddTeamModal";
+import ShowTeamModal from "../../../components/ShowTeamModal";
 import SearchableCardGrid from "../../../components/SearchableCardGrid";
 import CurrentModal from "../../../components/CurrentModal";
 import Head from "next/head";
@@ -16,7 +16,7 @@ const Spelers: NextPage = () => {
   const [search, setSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
-  const [addTeamModalOpen, setAddTeamModalOpen] = useState(false);
+  const [ShowTeamModalOpen, setShowTeamModalOpen] = useState(false);
 
   useEffect(() => {
     if (!process.env.NEXT_PUBLIC_NO_API) {
@@ -34,7 +34,7 @@ const Spelers: NextPage = () => {
         <meta name="description" content="DFK spelers" />
       </Head>
       {/* Add Player Modal */}
-      <AddSpelerModal
+      <ShowPlayerModal
         addModalOpen={addModalOpen}
         setAddModalOpen={setAddModalOpen}
         players={players}
@@ -58,15 +58,15 @@ const Spelers: NextPage = () => {
           currentModalOpen={isOpen}
           setCurrentModal={setIsOpen}
           addTeams={true}
-          addTeamModalOpen={addTeamModalOpen}
-          setAddTeamModalOpen={setAddTeamModalOpen}
+          ShowTeamModalOpen={ShowTeamModalOpen}
+          setShowTeamModalOpen={setShowTeamModalOpen}
         />
       )}
 
       {/* This is for inside the current modal when adding a team to the player */}
-      <AddTeamModal
-        addModalOpen={addTeamModalOpen}
-        setAddModalOpen={setAddTeamModalOpen}
+      <ShowTeamModal
+        addModalOpen={ShowTeamModalOpen}
+        setAddModalOpen={setShowTeamModalOpen}
         showTeamList={true}
         currentPlayer={currentPlayer}
       />

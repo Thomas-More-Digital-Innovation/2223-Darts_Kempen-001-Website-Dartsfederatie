@@ -12,7 +12,7 @@ import { getTeams } from "../modules/team";
 import { getPlayers } from "../modules/player";
 import SubmitButton from "./SubmitButton";
 
-type AddClubModalData = {
+type ShowClubModalData = {
   addModalOpen: boolean;
   setAddModalOpen: Dispatch<React.SetStateAction<boolean>>;
   clubs: Club[];
@@ -20,8 +20,8 @@ type AddClubModalData = {
   currentClub?: ClubFront | null;
 };
 
-const AddClubModal: FunctionComponent<AddClubModalData> = (
-  props: AddClubModalData
+const ShowClubModal: FunctionComponent<ShowClubModalData> = (
+  props: ShowClubModalData
 ) => {
   const [formValues, setFormValues] = useState<{ [key: string]: string }>({
     name: "",
@@ -233,4 +233,4 @@ const AddClubModal: FunctionComponent<AddClubModalData> = (
   );
 };
 
-export default AddClubModal;
+export default ShowClubModal;

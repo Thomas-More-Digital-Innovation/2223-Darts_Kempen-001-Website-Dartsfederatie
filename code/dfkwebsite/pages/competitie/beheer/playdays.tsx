@@ -33,13 +33,26 @@ const GeneratePlaydays: NextPage = () => {
 
   const [amountTeams, setAmountTeams] = useState<number>(0);
 
+  function getTeamsSelect() {
+    return Array.from({ length: amountTeams }).map((_, index) => {
+      return {
+        label: `Team ${index + 1} ${
+          competitionTeams[index]?.label
+            ? `(${competitionTeams[index].label})`
+            : ""
+        } `,
+        value: competitionTeams[index]?.value ?? "",
+      };
+    });
+  }
+
   const [tableData, setTableData] = useState<TableData[][]>([]);
 
   const handleAmountTeamsChange = (
     competitionInfo: CompetitionPartialFront,
     teamAmount?: number
   ): void => {
-    const teamCount = teamAmount || amountTeams;
+    const teamCount = teamAmount ?? amountTeams;
 
     if (!competitionInfo) return;
 
@@ -59,7 +72,13 @@ const GeneratePlaydays: NextPage = () => {
       }
       newData.push(row);
     }
+
+    setCompetitionTeams(
+      Array.from({ length: teamCount }).fill({}) as SelectOption[]
+    );
+
     setTableData(newData);
+    console.log(newData);
   };
 
   const handleTableDataChange = (
@@ -84,7 +103,9 @@ const GeneratePlaydays: NextPage = () => {
     })
   );
 
-  const [competitionTeams, setCompetitionTeams] = useState<SelectOption[]>([]);
+  const [competitionTeams, setCompetitionTeams] = useState<SelectOption[]>(
+    Array.from({ length: amountTeams }).fill({}) as SelectOption[]
+  );
 
   const tableFilled = (): boolean => {
     if (tableData.some((row) => row.some((cell) => !cell.team1 || !cell.team2)))
@@ -131,11 +152,17 @@ const GeneratePlaydays: NextPage = () => {
           });
 
         if (!currentCompetition) {
-          console.log("No competition by this ID found");
-          return;
+          if (params.dummy) {
+            currentCompetition = dummyData.competitions[0];
+            setCompetitionInfo(currentCompetition);
+          } else {
+            console.log("No competition by this ID found");
+            return;
+          }
         }
 
         if (currentCompetition?.teamsID) {
+          console.log("teamsID", currentCompetition.teamsID);
           setCompetitionTeams(
             teams.filter((team) =>
               currentCompetition?.teamsID
@@ -154,6 +181,11 @@ const GeneratePlaydays: NextPage = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  console.log("competition info", competitionInfo);
+  console.log("amount teams", amountTeams);
+  console.log("competition teams", competitionTeams);
+  console.log("table data", tableData);
 
   return (
     <div>
@@ -181,7 +213,7 @@ const GeneratePlaydays: NextPage = () => {
       />
 
       <div
-        className="grid children:py-4 gap-2 children:border-b  text-white border-t"
+        className="grid children:py-4 gap-2 children:border-b border-t"
         style={{
           gridTemplateRows: `repeat(${
             competitionTeams.length + 1
@@ -220,20 +252,18 @@ const GeneratePlaydays: NextPage = () => {
             </div>
             {rowData.map((data, columnIndex) => (
               <div key={columnIndex} className="flex items-center ">
-                <div className="flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-center items-center w-full text-black">
                   <DefaultSelect
                     name={`${rowIndex}-${columnIndex}`}
                     labelEnabled={false}
-                    options={competitionTeams}
+                    options={getTeamsSelect()}
                     search
-                    value={{
-                      label: competitionTeams.find(
-                        (competitionTeam) =>
-                          competitionTeam.value ===
+                    value={getTeamsSelect().find(
+                      (competitionTeam) =>
+                        competitionTeam.value != "" &&
+                        competitionTeam.value ===
                           tableData[rowIndex][columnIndex].team1
-                      )?.label,
-                      value: tableData[rowIndex][columnIndex].team1,
-                    }}
+                    )}
                     onSelectChange={(
                       selectedOption: SelectOption,
                       action: { action: string; name: string }
@@ -250,17 +280,15 @@ const GeneratePlaydays: NextPage = () => {
                   <span>vs</span>
                   <DefaultSelect
                     name={`${rowIndex}-${columnIndex}`}
-                    options={competitionTeams}
+                    options={getTeamsSelect()}
                     labelEnabled={false}
                     search
-                    value={{
-                      label: competitionTeams.find(
-                        (competitionTeam) =>
-                          competitionTeam.value ===
+                    value={getTeamsSelect().find(
+                      (competitionTeam) =>
+                        competitionTeam.value != "" &&
+                        competitionTeam.value ===
                           tableData[rowIndex][columnIndex].team2
-                      )?.label,
-                      value: tableData[rowIndex][columnIndex].team2,
-                    }}
+                    )}
                     onSelectChange={(
                       selectedOption: SelectOption,
                       action: { action: string; name: string }

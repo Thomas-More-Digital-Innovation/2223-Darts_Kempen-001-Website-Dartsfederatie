@@ -15,7 +15,7 @@ import { getClubs } from "../modules/club";
 import { getPlayers } from "../modules/player";
 import SubmitButton from "./SubmitButton";
 
-type AddTeamModalData = {
+type ShowTeamModalData = {
   addModalOpen: boolean;
   setAddModalOpen: any;
   currentClub?: ClubFront | null;
@@ -25,8 +25,8 @@ type AddTeamModalData = {
   setTeams?: Dispatch<React.SetStateAction<TeamFront[]>>;
 };
 
-const AddTeamModal: FunctionComponent<AddTeamModalData> = (
-  props: AddTeamModalData
+const ShowTeamModal: FunctionComponent<ShowTeamModalData> = (
+  props: ShowTeamModalData
 ) => {
   const [formValues, setFormValues] = useState<{ [key: string]: string }>({
     name: "",
@@ -226,4 +226,4 @@ const AddTeamModal: FunctionComponent<AddTeamModalData> = (
   );
 };
 
-export default AddTeamModal;
+export default ShowTeamModal;

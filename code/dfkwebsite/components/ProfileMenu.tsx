@@ -15,14 +15,24 @@ export default function ProfileMenu() {
       localStorage.setItem("darkMode", "true");
     }
   }
-
+  
   useEffect(() => {
-    if (localStorage.getItem("darkMode") === "true") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
+    const savedDarkModePreference = localStorage.getItem("darkMode");
+    const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // If the user has a saved preference, apply it
+    if (savedDarkModePreference !== null) {
+      if (savedDarkModePreference === "true") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
     }
-  }, []);
+    // If there is no saved preference, apply system preference
+    else if (systemPrefersDark) {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);  
 
   return (
     <div>

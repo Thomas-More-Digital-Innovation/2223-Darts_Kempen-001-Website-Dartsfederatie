@@ -1,12 +1,12 @@
 import Image from "next/image";
-import dfkLogo from "../public/dfklogo.png";
+import dfkLogo from "../public/DFK_logo_FC.svg";
 import Link from "next/link";
 import FooterLink from "./FooterLink";
 import { FunctionComponent } from "react";
 
 const Footer: FunctionComponent = () => {
   return (
-    <footer className="bg-white dark:bg-footer-background flex flex-col px-10 lg:px-20 py-10 text-blacktext dark:text-white">
+    <footer className="bg-white dark:bg-footer-background flex flex-col py-10 text-blacktext dark:text-white">
       <div className="flex flex-row items-top gap-10 lg:gap-0 justify-between items-top flex-wrap">
         <div className="order-0">
           <h1 className="text-2xl mb-1">Navigatie</h1>
@@ -40,11 +40,11 @@ const Footer: FunctionComponent = () => {
         </p>
         <p className="pt-8">
           Gemaakt door{" "}
-          <Link href={"https://bryandeckers.com"} target="_blank"  className="hover:text-gray-400 dark:hover:text-gray-500">
+          <Link href={"https://bryandeckers.com"} target="_blank"  className="hover:text-gray-400 dark:hover:text-gray-500 underline">
             Bryan Deckers
           </Link>{" "}
           en{" "}
-          <Link href={"https://syandelbart.com"} target="_blank" className="hover:text-gray-400 dark:hover:text-gray-500">
+          <Link href={"https://syandelbart.com"} target="_blank" className="hover:text-gray-400 dark:hover:text-gray-500 underline">
             Syan Delbart
           </Link>
         </p>

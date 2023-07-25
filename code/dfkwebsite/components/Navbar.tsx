@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import NavItem from "./NavItem";
-import dfkLogo from "../public/dfklogo.png";
+import dfkLogo from "../public/DFK_logo_FC.svg";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { FunctionComponent, useState } from "react";
@@ -81,7 +81,7 @@ const routes = [
 const Navbar: FunctionComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="px-10 lg:px-20 py-5 flex flex-wrap justify-between items-center relative">
+    <nav className="py-5 flex flex-wrap justify-between items-center relative">
       <Icon
         icon="mdi:hamburger-menu"
         className="lg:hidden text-6xl text-blacktext dark:text-white order-0 lg:order-1"
@@ -91,7 +91,7 @@ const Navbar: FunctionComponent = () => {
         <Image
           src={dfkLogo}
           alt="dfk logo"
-          width={100}
+          width={150}
           height={100}
           className="aspect-square h-16 sm:h-full object-contain order-1 lg:order-0"
           loading="eager"

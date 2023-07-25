@@ -1,36 +1,66 @@
 import { NextPage } from "next";
+import ImageRead from "../../../components/ImageRead";
+import { posts } from "./[name]";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Head from "next/head";
 
 const Nieuws: NextPage = () => {
+  const [news, setNews] = useState(posts);
+  useEffect(() => {
+    if (!process.env.NEXT_PUBLIC_NO_API) {
+      fetch(`/api/news`)
+        .then((news) => news.json())
+        .then((parsedNews) => setNews(parsedNews))
+        .catch((err) => console.log(err));
+    }
+  }, []);
   return (
     <div>
-      <h1 className="text-6xl font-extrabold text-blacktext dark:text-white mb-5">Nieuws</h1>
-      {/* <ImageRead
-        title={posts[0].title}
-        summary={posts[0].summary}
-        src={posts[0].src}
-        date={posts[0].date}
+      <Head>
+        <title>DFK | Nieuws</title>
+        <meta name="description" content="DFK nieuws" />
+      </Head>
+      <div className="flex items-center justify-between">
+        <h1 className="text-6xl font-extrabold text-blacktext dark:text-white mb-5">
+          Nieuws
+        </h1>
+        <Link
+          href="/info/nieuws/beheer"
+          className="py-4 px-6 mt-4 text-white dark:text-blacktext bg-neutral-700 hover:bg-neutral-800 dark:bg-gray-200 dark:hover:bg-gray-300"
+        >
+          Beheer
+        </Link>
+      </div>
+
+      <ImageRead
+        title={news[0].title}
+        summary={news[0].text.substring(0, 100) + "..."}
+        src={news[0].src}
+        date={news[0].datePublished}
       />
 
-      <div className="grid grid-cols-4 gap-8">
-        {posts.slice(1).map((post) => (
-          <div className="w-full relative">
+      <div className="grid grid-cols-4 gap-8 mt-20 text-blacktext dark:text-white">
+        {news.slice(1).map((news) => (
+          <div className="w-full relative" key={news.title}>
             <div className="w-full h-[250px] relative">
               <Image
                 className="bg-light-gray object-contain"
-                src={post.src}
-                alt={post.srcAlt}
+                src={news.src}
+                alt={news.srcAlt}
                 fill
               ></Image>
             </div>
-            <h1 className="font-bold text-4xl mt-4 text-white">{post.title}</h1>
-            <h6 className="text-white text-sm">
-              {new Date(post.date).toLocaleDateString()}
+            <h1 className="font-bold text-4xl mt-4">{news.title}</h1>
+            <h6 className="text-sm">
+              {new Date(news.datePublished).toLocaleDateString()}
             </h6>
-            <p className="text-white mt-6">{post.summary}</p>
+            <p className="mt-6">{news.text}</p>
 
             <Link
-              className="inline-block py-4 px-6 mt-4 bg-blue-50"
-              href={`/info/nieuws/${post.title
+              className="inline-block py-4 px-6 mt-4 text-white dark:text-blacktext bg-neutral-700 hover:bg-neutral-800 dark:bg-gray-200 dark:hover:bg-gray-300"
+              href={`/info/nieuws/${news.title
                 .toLowerCase()
                 .replace(" ", "-")}`}
             >
@@ -38,7 +68,7 @@ const Nieuws: NextPage = () => {
             </Link>
           </div>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };

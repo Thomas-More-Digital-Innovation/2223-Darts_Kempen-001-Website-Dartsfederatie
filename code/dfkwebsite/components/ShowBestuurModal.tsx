@@ -4,19 +4,52 @@ import DefaultInput from "./DefaultInput";
 import DefaultCheckbox from "./DefaultCheckbox";
 import DefaultSelect from "./DefaultSelect";
 import InformationBox from "./InformationBox";
+import SubmitButton from "./SubmitButton";
 
-type AddBestuurModalData = {
+type ShowBestuurModalData = {
   addModalOpen: boolean;
   setAddModalOpen: any;
 };
 
-const AddBestuurModal: FunctionComponent<AddBestuurModalData> = (
-  props: AddBestuurModalData
+const ShowBestuurModal: FunctionComponent<ShowBestuurModalData> = (
+  props: ShowBestuurModalData
 ) => {
   const [handleSubmitSuccess, setHandleSubmitSuccess] = useState<
     boolean | null
   >(false);
   const [informationBoxMessage, setInformationBoxMessage] = useState("");
+
+  const handleSubmit = async (event: any) => {
+    // let bestuurslid: Club | null = await formHandler.handleSubmit(
+    //   event,
+    //   formValues,
+    //   clubRegexPatterns,
+    //   props.currentClub
+    //     ? `/api/clubs/${props.currentClub.clubID}`
+    //     : "/api/clubs",
+    //   setInformationBoxMessage,
+    //   setHandleSubmitSuccess,
+    //   dummyData.club[0],
+    //   process.env.NEXT_PUBLIC_NO_API == "1" ? true : false,
+    //   props.currentClub ? true : false
+    // );
+
+    // if (!club) return;
+
+    // setInformationBoxMessage(
+    //   "Bestuurslid succesvol aangemaakt, je wordt binnen 5 seconden terug gestuurd naar het algemeen overzicht."
+    // );
+    // props.setClubs((clubs) => {
+    //   if (!club) return clubs;
+    //   // The new Club will be of type Club, but we want it to be of type ClubFront
+    //   return [...clubs, club as ClubFront];
+    // });
+    // setTimeout(() => {
+    //   props.setAddModalOpen(false);
+    //   setInformationBoxMessage("")
+    // }, 5000);
+  };
+
   return (
     <Modal
       title="Bestuur toevoegen"
@@ -62,12 +95,10 @@ const AddBestuurModal: FunctionComponent<AddBestuurModalData> = (
             { value: "algemeen bestuurslid", label: "Algemeen bestuurslid" },
           ]}
         />
-        <button className="bg-[#0A893D] text-white rounded-lg p-3 mt-10">
-          Aanmaken
-        </button>
+        <SubmitButton handleSubmit={handleSubmit} />
       </div>
     </Modal>
   );
 };
 
-export default AddBestuurModal;
+export default ShowBestuurModal;
