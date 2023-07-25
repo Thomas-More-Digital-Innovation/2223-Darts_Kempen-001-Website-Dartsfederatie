@@ -14,6 +14,8 @@ import {
   CLASSIFICATION,
   COMPETITION_TYPE,
   Competition,
+  CompetitionFront,
+  CompetitionPartial,
 } from "../../../types/competition";
 import { clubRegexPatterns } from "../../../modules/club";
 
@@ -30,9 +32,24 @@ export const onRequestGet: PagesFunction<PagesEnv> = async ({
       prefix: params.prefix,
     });
 
-    let competitionsMapped = competitions.keys.map(async (competition) => {
-      return JSON.parse(await env.COMPETITION.get(competition.name));
-    });
+    let competitionsMapped: Promise<CompetitionFront>[] = competitions.keys.map(
+      async (competition) => {
+        let competitionData: Competition = JSON.parse(
+          await env.COMPETITION.get(competition.name)
+        );
+        let competitionPartials = competitionData.competitionIDs.map(
+          async (classification) =>
+            JSON.parse(
+              await env.COMPETITION.get(classification)
+            ) as CompetitionPartial
+        );
+
+        return {
+          ...competitionData,
+          competitions: await Promise.all(competitionPartials),
+        };
+      }
+    );
 
     return new Response(JSON.stringify(await Promise.all(competitionsMapped)), {
       headers: {
@@ -55,23 +72,35 @@ export const onRequestPost: PagesFunction<PagesEnv> = async ({
   try {
     let formData = await request.formData();
 
-    checkFields(formData, competitionRegexPatterns);
-
     // ID will be random, uuidv4() generates a random UUID
     const competitionIdKey = `id:${new Date().getTime()}`;
 
-    let data: Competition = {
-      competitionID: competitionIdKey,
-      classification: formData.get(
-        CompetitionSubmission.CLASSIFICATION
-      ) as CLASSIFICATION,
-      name: formData.get(CompetitionSubmission.NAME),
-      startDate: new Date(
-        formData.get(CompetitionSubmission.STARTDATE)
-      ).getTime(),
-      endDate: new Date(formData.get(CompetitionSubmission.ENDDATE)).getTime(),
-      type: formData.get(CompetitionSubmission.TYPE) as COMPETITION_TYPE,
-    };
+    let data: Competition = await changeData(
+      competitionRegexPatterns,
+      {
+        competitionID: competitionIdKey,
+      },
+      formData
+    );
+
+    let partialIDs = data.classification.map(async (classification) => {
+      const competitionClassificationIdKey = `classification:${competitionIdKey}:${classification}`;
+
+      let classificationData: CompetitionPartial = {
+        competitionPartialID: competitionClassificationIdKey,
+        competitionID: competitionIdKey,
+        classification: classification,
+      };
+
+      await env.COMPETITION.put(
+        competitionClassificationIdKey,
+        JSON.stringify(classificationData)
+      );
+
+      return classificationData.competitionPartialID;
+    });
+
+    data = { ...data, competitionIDs: await Promise.all(partialIDs) };
 
     await env.COMPETITION.put(competitionIdKey, JSON.stringify(data));
 

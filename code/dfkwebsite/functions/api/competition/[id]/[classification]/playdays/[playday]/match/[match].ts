@@ -1,11 +1,8 @@
-import { matchRegexPatterns } from "../../../../../../../modules/competition";
-import {
-  getRecordByIdOrError,
-  changeData,
-} from "../../../../../../../modules/general";
-import { Competition } from "../../../../../../../types/competition";
-import { Match } from "../../../../../../../types/match";
-import { PagesEnv } from "../../../../../env";
+import { matchRegexPatterns } from "@/modules/competition";
+import { getRecordByIdOrError, changeData } from "@/modules/general";
+import { Competition } from "types/competition";
+import { Match } from "@/types/match";
+import { PagesEnv } from "@/functions/api/env";
 
 export const onRequestGet: PagesFunction<PagesEnv> = async ({
   request,
