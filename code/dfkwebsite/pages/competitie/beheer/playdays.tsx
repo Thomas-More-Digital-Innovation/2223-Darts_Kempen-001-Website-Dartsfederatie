@@ -153,7 +153,7 @@ const GeneratePlaydays: NextPage = () => {
 
         if (!currentCompetition) {
           if (params.dummy) {
-            currentCompetition = dummyData.competitions[0];
+            currentCompetition = dummyData.competitionPartials[0];
             setCompetitionInfo(currentCompetition);
           } else {
             console.log("No competition by this ID found");

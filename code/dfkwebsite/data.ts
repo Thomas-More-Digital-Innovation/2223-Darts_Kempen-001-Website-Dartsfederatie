@@ -3,26 +3,13 @@ import {
   CLASSIFICATION,
   COMPETITION_TYPE,
   Competition,
+  CompetitionFront,
+  CompetitionPartialFront,
 } from "./types/competition";
 import { ClubFront } from "./types/club";
 import { PlayerFront } from "./types/player";
 import { TeamFront } from "./types/team";
 import { User } from "./types/user";
-
-export const competitions: Array<Competition> = [
-  {
-    competitionID: "id:dummy:1",
-    type: COMPETITION_TYPE.COMPETITION,
-    startDate: 0,
-    endDate: 0,
-    dateCreated: 0,
-    dateLastModified: 0,
-    classification: [CLASSIFICATION.PROVINCIAAL],
-    competitionIDs: [""],
-    teamAmount: 5,
-  },
-];
-
 
 export const players: Array<PlayerFront> = [
   {
@@ -170,18 +157,6 @@ export const bestuur: Array<managementData> = [
   },
 ];
 
-export const competitions: Array<Competition> = [
-  {
-    competitionID: "id:dummy:1",
-    name: "competitie 1",
-    type: COMPETITION_TYPE.COMPETITION,
-    classification: CLASSIFICATION.PROVINCIAAL,
-    startDate: new Date("2021-01-01").getTime(),
-    endDate: new Date("2021-03-01").getTime(),
-    teamsID: teams.map((team) => team.teamID),
-  },
-];
-
 //Given the following data, can you create a function that will make multiple of this dummy data?
 export let club: Array<ClubFront> = [
   {
@@ -200,48 +175,37 @@ export let club: Array<ClubFront> = [
   },
 ];
 
-// const news = Array.from({ length: 20 }, (_, i) => ({
-//     id: `${i}`,
-//     title: `Project ${i}`,
-//     description: `Description ${i}`,
-//     date: i,
-//     text: `Text ${i}`,
-// }));
+export const competitions: Array<CompetitionFront> = [
+  {
+    competitionID: "id:dummy:1",
+    type: COMPETITION_TYPE.COMPETITION,
+    startDate: 0,
+    endDate: 0,
+    dateCreated: 0,
+    dateLastModified: 0,
+    classification: [CLASSIFICATION.PROVINCIAAL],
+    competitionIDs: ["id:dummy:partial:1"],
+    teamAmount: 5,
+    competitions: [],
+  },
+];
 
-// export function createNews() {
-//   news.forEach((item: News) => {
-//   let data = new FormData();
-//   data.append("title", item.title);
-//   data.append("description", item.description);
-//   data.append("date", item.date.toString());
-//   data.append("text", item.text);
-
-//   fetch("/api/news/add",{
-//       body: data,
-//       method: "POST",
-//   }).then(response => console.log(response));
-// });
-// }
-
-// const playerslist = Array.from({ length: 20 }, (_, i) => ({
-//     id: `${i}`,
-//     firstname: `Firstname ${i}`,
-//     lastname: `Lastname ${i}`,
-//     phone: `Phone ${i}`,
-//     allowed: i % 2 === 0,
-// }));
-
-// export function createPlayers() {
-//   playerslist.forEach((item: Player) => {
-//   let data = new FormData();
-//   data.append("firstname", item.firstName);
-//   data.append("lastname", item.lastName);
-//   data.append("phone", item.phone);
-//   data.append("allowed", item.allowedToPlay.toString());
-
-//   fetch("/api/player/add",{
-//       body: data,
-//       method: "POST",
-//   }).then(response => console.log(response));
-// });
-// }
+export const competitionPartials: CompetitionPartialFront[] = [
+  {
+    competitionPartialID: "id:dummy:partial:1",
+    classification: CLASSIFICATION.PROVINCIAAL,
+    competitionID: competitions[0].competitionID,
+    competition: competitions[0],
+    teams: teams,
+    teamsID: teams.map((team) => team.teamID),
+    deleted: false,
+    playdays: [
+      [
+        {
+          team1: teams[0].teamID,
+          team2: teams[1].teamID,
+        },
+      ],
+    ],
+  },
+];

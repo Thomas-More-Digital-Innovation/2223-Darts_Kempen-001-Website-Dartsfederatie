@@ -1,5 +1,5 @@
 import { TableData } from "../pages/competitie/beheer/playdays";
-import { Team } from "./team";
+import { Team, TeamFront } from "./team";
 
 export enum CLASSIFICATION {
   PROVINCIAAL = "PROVINCIAAL",
@@ -40,7 +40,7 @@ export type CompetitionPartial = {
 
 export interface CompetitionPartialFront extends CompetitionPartial {
   competition: Competition;
-  teams: Team[];
+  teams: TeamFront[];
 }
 
 export type Playday = {
