@@ -7,6 +7,7 @@ import {
 import { ClubFront } from "./types/club";
 import { PlayerFront } from "./types/player";
 import { TeamFront } from "./types/team";
+import { User } from "./types/user";
 
 export const players: Array<PlayerFront> = [
   {
@@ -22,6 +23,12 @@ export const players: Array<PlayerFront> = [
     phone: "+32 123 45 67 89",
     allowedToPlay: true,
     playerID: "id:77777242424",
+  },
+];
+
+export const users: User[] = [
+  {
+    userID: "id:123456798",
   },
 ];
 

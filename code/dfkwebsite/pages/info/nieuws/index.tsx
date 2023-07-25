@@ -37,7 +37,7 @@ const Nieuws: NextPage = () => {
       <ImageRead
         title={news[0].title}
         summary={news[0].text.substring(0, 100) + "..."}
-        src={news[0].src}
+        src={news[0].thumbnail}
         date={news[0].datePublished}
       />
 
@@ -47,8 +47,8 @@ const Nieuws: NextPage = () => {
             <div className="w-full h-[250px] relative">
               <Image
                 className="bg-light-gray object-contain"
-                src={news.src}
-                alt={news.srcAlt}
+                src={news.thumbnail}
+                alt={news.thumbnailAlt}
                 fill
               ></Image>
             </div>
