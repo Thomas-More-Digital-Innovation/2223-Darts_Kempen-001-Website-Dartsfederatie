@@ -2,81 +2,101 @@ import ImageRead from "../../../components/ImageRead";
 import Image from "next/image";
 import Link from "next/link";
 import { NextPage } from "next";
-import { News } from "../../../types/news";
+import { Post, PostFront } from "../../../types/posts";
+import { users } from "../../../data";
 
-export let posts : News[] = [
+export let posts: PostFront[] = [
   {
     title: "Post 1",
-    text:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-    src: "/dfklogo.png",
-    srcAlt: "test",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+    thumbnail: "/dfklogo.png",
+    thumbnailAlt: "test",
     datePublished: 1,
-    newsID: "1",
+    postID: "1",
+    dateCreated: 1,
+    authorID: "1",
+    author: users[0],
+    textFormatted:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     title: "Post 2",
-    text:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-    src: "/dfklogo.png",
-    srcAlt: "test",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+    thumbnail: "/dfklogo.png",
+    thumbnailAlt: "test",
     datePublished: 2,
-    newsID: "2",
+    postID: "2",
+    dateCreated: 1,
+    authorID: "1",
+    author: users[0],
+    textFormatted:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     title: "Post 3",
-    text:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-    src: "/dfklogo.png",
-    srcAlt: "test",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+    thumbnail: "/dfklogo.png",
+    thumbnailAlt: "test",
     datePublished: 3,
-    newsID: "3",
+    postID: "3",
+    dateCreated: 1,
+    authorID: "1",
+    author: users[0],
+    textFormatted:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     title: "Post 4",
-    text:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-    src: "/dfklogo.png",
-    srcAlt: "test",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+    thumbnail: "/dfklogo.png",
+    thumbnailAlt: "test",
     datePublished: 4,
-    newsID: "4",
+    postID: "4",
+    dateCreated: 1,
+    authorID: "1",
+    author: users[0],
+    textFormatted:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
   {
     title: "Post 5",
-    text:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-    src: "/dfklogo.png",
-    srcAlt: "test",
+    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
+    thumbnail: "/dfklogo.png",
+    thumbnailAlt: "test",
     datePublished: 5,
-    newsID: "5",
+    postID: "5",
+    dateCreated: 1,
+    authorID: "1",
+    author: users[0],
+    textFormatted:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
   },
 ];
 
-posts.sort((a, b) => b.datePublished - a.datePublished);
+//TODO: Clean this up
+posts.sort((a, b) => (b.datePublished ?? 0) - (a.datePublished ?? 0));
 
 const Nieuws: NextPage = () => {
   return (
     <div>
-      <h1
-        className="text-6xl font-extrabold text-blacktext dark:text-white mb-5"
-      >
+      <h1 className="text-6xl font-extrabold text-blacktext dark:text-white mb-5">
         Nieuws
       </h1>
       <ImageRead
         title={posts[0].title}
         summary={posts[0].text}
-        src={posts[0].src}
+        src={posts[0].thumbnail}
         date={posts[0].datePublished}
       />
 
       <div className="grid grid-cols-4 gap-8">
         {posts.slice(1).map((post) => (
-          <div className="w-full relative" key={post.newsID}>
+          <div className="w-full relative" key={post.postID}>
             <div className="w-full h-[250px] relative">
               <Image
                 className="bg-[#676767] object-contain"
-                src={post.src}
-                alt={post.srcAlt}
+                src={post.thumbnail}
+                alt={post.thumbnailAlt}
                 fill
               ></Image>
             </div>
